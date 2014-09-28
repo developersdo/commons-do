@@ -25,11 +25,21 @@
 package org.devdom.commons.exceptions;
 
 /**
- *
+ * <p>Clase utilizada para manejar errores atrapados referente a un mal formato del
+ * de un documento o respuesta JSON.
+ * </p>
+ * 
+ * <p>También es usado en casos de retorno de información un formato no deseado.
+ * 
  * @author Carlos Vásquez Polanco
+ * @since 0.3.1
  */
 public class MalformedJSONException extends Exception{
     
+    /**
+     * Mensaje por defecto al capturar una exception "<i>documento JSON mal formado</i>"
+     * 
+     */
     public MalformedJSONException(){
         super("documento JSON mal formado");
     }

@@ -25,8 +25,10 @@
 package org.devdom.commons.exceptions;
 
 /**
- *
+ * Clase utilizada para manejar errores A petición de información.
+ * 
  * @author Carlos Vásquez Polanco
+ * @since 0.0.1
  */
 public class RequesterInformationException extends Exception{
     

@@ -25,8 +25,11 @@
 package org.devdom.commons.exceptions;
 
 /**
- *
+ * Clase utilizada para manejar errores atrapados referente a un formato incorrecto
+ * en documento.
+ * 
  * @author Carlos Vásquez Polanco
+ * @since 0.0.1
  */
 public class DocumentFormatException extends Exception{
     
@@ -37,7 +40,14 @@ public class DocumentFormatException extends Exception{
     public DocumentFormatException(String message, Throwable cause){
         super(message, cause);
     }
-    
+    /**
+     * Método utilizado para reportar en el error la longitud que se está intentanto
+     * pasar.
+     * 
+     * @param message
+     * @param cause
+     * @param len 
+     */
     public DocumentFormatException(String message, Throwable cause, byte len){
         super("Longitud: "+len+", "+message,cause);
     }
