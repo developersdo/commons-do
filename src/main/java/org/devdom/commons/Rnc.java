@@ -40,7 +40,7 @@ public class Rnc {
 
         String url = Configuration.DATA_RNC_URL + documentId + ".json";
         
-        RncRequest request = new RncRequest();
+        Request request = new Request();
         
         JSONObject json = request.getResponse(url);
         

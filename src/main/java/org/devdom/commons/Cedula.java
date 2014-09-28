@@ -32,20 +32,42 @@ import org.devdom.commons.exceptions.DocumentFormatException;
  */
 public final class Cedula {
     
+    /**
+     *
+     */
     public Cedula(){
         throw new AssertionError("La clase no debe ser instanciada");
     }
     
     /**
      * 
+     * Método utilizado para verificar si una cédula de la República Dominicana
+     * es válida. Para verificar debe ser pasado un arreglo de 3 partes.
+     * 
      * @param part
      * @return 
+     * @throws org.devdom.commons.exceptions.DocumentFormatException 
      */
-    public static boolean isValid(String[] part){
-        return false;
+    public static boolean isValid(String[] part) throws DocumentFormatException{
+        
+        int len = part.length;
+        String documentId = ""; 
+
+        if(len!=3){
+            throw new DocumentFormatException("Deben pasarse 3 partes para formar la cédula");
+        }
+
+        for(int i=0;i<len;i++){
+            documentId += part[i];
+        }
+
+        return isValid(documentId);
     }
     
     /**
+     * 
+     * Método utilizado para verificar si una cédula de la República Dominicana
+     * es válida. Verifica pasando 3 parámetros.
      * 
      * @param part1
      * @param part2
@@ -61,6 +83,9 @@ public final class Cedula {
     } 
 
     /**
+     * 
+     * Método utilizado para verificar si una cédula de la República Dominicana
+     * es válida.
      * 
      * @param documentId
      * @return
@@ -101,6 +126,9 @@ public final class Cedula {
     
     /**
      * 
+     * Método utilitario para cuando se necesite retornar una cédula introducida
+     * en el formato con guiones utilizado en la República Dominicana.
+     * 
      * @param documentId
      * @return 
      */
@@ -121,6 +149,8 @@ public final class Cedula {
     
     /**
      * 
+     * Método utilitario para cuando necesites retornar la cédula separada en partes.
+     * 
      * @param documentId
      * @return 
      */
@@ -129,6 +159,9 @@ public final class Cedula {
     }
     
     /**
+     * 
+     * Método utilitario para cuando necesites retornar la cédula separada en partes
+     * espeficando el separador a utilizar.
      * 
      * @param documentId
      * @param sep

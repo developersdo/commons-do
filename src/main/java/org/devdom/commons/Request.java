@@ -39,7 +39,7 @@ import org.json.JSONObject;
  *
  * @author Carlos Vásquez Polanco
  */
-public class RncRequest {
+public class Request {
 
     private HttpURLConnection conn;
     private URL url;
