@@ -27,6 +27,7 @@ package org.devdom.commons.util;
 /**
  *
  * @author Carlos Vásquez Polanco
+ * @since 0.0.1
  */
 public interface Configuration {
     

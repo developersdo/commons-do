@@ -38,11 +38,13 @@ import org.json.JSONObject;
 public class Rnc {
 
     /**
+     * Ontener información a partir de una numeración de RNC
      * 
      * @param documentId
-     * @return
-     * @throws RequesterInformationException
-     * @throws MalformedJSONException 
+     * @return RNCObject
+     * @see RNCObject con información de empresa en República Dominicana
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
     public static RNCObject getInformation(String documentId) 
             throws RequesterInformationException, MalformedJSONException{
