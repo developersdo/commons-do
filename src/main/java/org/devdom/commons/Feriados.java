@@ -37,8 +37,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- *
+ * Clase utilizada para manejar los días feriados en la República Dominicana
+ * para el año en curso.
+ * 
  * @author Carlos Vásquez Polanco
+ * @since 0.5.1
  */
 public class Feriados {
     
@@ -46,10 +49,13 @@ public class Feriados {
 
     /**
      * 
-     * @return
-     * @throws RequesterInformationException
-     * @throws MalformedJSONException
-     * @throws ParseException 
+     * Listado de días feriados según el Ministerio de Trabajo de la República Dominicana
+     * 
+     * @return ArrayList de objetos Feriado
+     * @see Feriado
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
+     * @throws ParseException si hubo error de parseo
      */
     public static ArrayList<Feriado> getList() 
             throws RequesterInformationException, MalformedJSONException, ParseException{
@@ -62,11 +68,19 @@ public class Feriados {
 
     /**
      * 
-     * @param year
-     * @return
-     * @throws RequesterInformationException
-     * @throws MalformedJSONException 
-     * @throws java.text.ParseException 
+     * <p>Listado de días feriados según el Ministerio de Trabajo de la República Dominicana.
+     * El método recibe el año que se desea evaluar.
+     * 
+     * <p>Este método aun funciona con el año en curso, de intentar ver un año pasado será 
+     * lanzada una excepción. El método fue pensado para cuando esta restricción del 
+     * servicio sea liberada.
+     * 
+     * @param year año a ser evaluado
+     * @return ArrayList de objetos Feriado
+     * @see Feriado
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
+     * @throws ParseException si hubo error de parseo 
      */
     public static ArrayList<Feriado> getList(int year) 
             throws RequesterInformationException, MalformedJSONException, ParseException{
@@ -104,10 +118,16 @@ public class Feriados {
     
     /**
      * 
-     * @return
-     * @throws RequesterInformationException
-     * @throws MalformedJSONException 
-     * @throws java.text.ParseException 
+     * <p>Método utilizado para saber si día en curso es feriado.
+     * 
+     * <p>Primero es verificada la fecha a la que fue movida por disposición
+     * de la ley Dominicana. Si la fecha festiva no es movida se revisa su fecha
+     * original.
+     * 
+     * @return boolean que determina si el día actual es feriado
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
+     * @throws ParseException si hubo error de parseo
      */
     public static boolean isTodayHoliday() 
             throws RequesterInformationException, MalformedJSONException, ParseException{
@@ -126,8 +146,7 @@ public class Feriados {
             }
             
             String holidayString = Utils.getDateFormatted(holiday);
-            System.out.println("currentDateString = " + currentDateString);
-            System.out.println("holidayString = " + holidayString);
+
             return (currentDateString.equals(holidayString));
 
         }
@@ -137,9 +156,12 @@ public class Feriados {
 
     /**
      * 
-     * @param json
-     * @return
-     * @throws MalformedJSONException 
+     * Obtener la definición de un día feriado según el Objeto JSON suplido
+     * 
+     * @param json RAW del JSON recibido para ser formateado
+     * @return Objeto Feriado
+     * @see Feriado
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
     private static Feriado getFeriadoObject(JSONObject json) 
             throws MalformedJSONException, ParseException{
@@ -150,7 +172,6 @@ public class Feriados {
             String fechaMovidoString = json.getString("fecha_movido");
             
             Date fechaOriginal = json.isNull("fecha_original") ? null : Utils.convertStringToDate(fechaOriginalString);
-
             Date fechaMovido = json.isNull("fecha_movido") ? null : Utils.convertStringToDate(fechaMovidoString);
 
             String motivo = json.getString("motivo");
