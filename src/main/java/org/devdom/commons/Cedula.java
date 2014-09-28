@@ -27,8 +27,10 @@ package org.devdom.commons;
 import org.devdom.commons.exceptions.DocumentFormatException;
 
 /**
- *
+ * Clase para manejar validaciones y formatos de la cédula de la República Dominicana.
+ * 
  * @author Carlos Vásquez Polanco
+ * @see 0.0.1
  */
 public final class Cedula {
     
@@ -44,9 +46,9 @@ public final class Cedula {
      * Método utilizado para verificar si una cédula de la República Dominicana
      * es válida. Para verificar debe ser pasado un arreglo de 3 partes.
      * 
-     * @param part
-     * @return 
-     * @throws org.devdom.commons.exceptions.DocumentFormatException 
+     * @param part documento suplido en un arreglo de 3 partes
+     * @return valor boolean que dice si el formato del documento es válido
+     * @throws DocumentFormatException si se pasan valores incorrectos o fuera de longitud 
      */
     public static boolean isValid(String[] part) 
             throws DocumentFormatException{
@@ -70,11 +72,11 @@ public final class Cedula {
      * Método utilizado para verificar si una cédula de la República Dominicana
      * es válida. Verifica pasando 3 parámetros.
      * 
-     * @param part1
-     * @param part2
-     * @param part3
-     * @return
-     * @throws DocumentFormatException 
+     * @param part1 primera parte a ser suplida para formar el documento
+     * @param part2 segunda parte a ser suplida para formar el documento
+     * @param part3 tercera parte a ser suplida para formar el documento
+     * @return valor boolean que dice si el formato del documento es válido
+     * @throws DocumentFormatException si se pasan valores incorrectos o fuera de longitud 
      */
     public static boolean isValid(String part1, String part2, String part3) 
             throws DocumentFormatException{
@@ -86,19 +88,19 @@ public final class Cedula {
 
     /**
      * 
-     * Método utilizado para verificar si una cédula de la República Dominicana
-     * es válida.
+     * Método utilizado para verificar si el valor suplido en el parámetros,
+     * es válido según el formato de cédula de la República Dominicana.
      * 
-     * @param documentId
-     * @return
-     * @throws DocumentFormatException 
+     * @param documentId numeración reference a la cédula de la Repúblic Dominicana
+     * @return valor boolean que dice si el formato del documento es válido
+     * @throws DocumentFormatException si se pasan valores incorrectos o fuera de longitud 
      */
     public static boolean isValid(String documentId) 
             throws DocumentFormatException{
 
         final char[] weight = {'1','2','1','2','1','2','1','2','1','2'};
         int mod = 0;
-        int div = 0;
+        int div;
         
         documentId = documentId.replace("-", "");
 
@@ -109,7 +111,7 @@ public final class Cedula {
         }
         
         if(len != 11){
-            throw new DocumentFormatException("Logitud de cédula incorrecto");
+            throw new DocumentFormatException("Logitud de cédula incorrecta");
         }
 
         for(int i = 0; i < 10; i++){
@@ -132,15 +134,21 @@ public final class Cedula {
      * Método utilitario para cuando se necesite retornar una cédula introducida
      * en el formato con guiones utilizado en la República Dominicana.
      * 
-     * @param documentId
-     * @return 
+     * @param documentId numeración reference a la cédula de la Repúblic Dominicana
+     * @return documento separado por dos guiones
+     * @throws DocumentFormatException si se pasan valores incorrectos o fuera de longitud
      */
-    public static String mask(String documentId){   
+    public static String mask(String documentId) 
+            throws DocumentFormatException{   
         
         final StringBuilder masked = new StringBuilder(13);
         final char[] words = documentId.toCharArray();
         final int len = words.length;
 
+        if(len != 11){
+            throw new DocumentFormatException("Logitud de cédula incorrecta");
+        }
+        
         for(int i=0; i<len;i++){
             if(i==3 || i==10){
                 masked.append("-");
@@ -154,8 +162,8 @@ public final class Cedula {
      * 
      * Método utilitario para cuando necesites retornar la cédula separada en partes.
      * 
-     * @param documentId
-     * @return 
+     * @param documentId numeración reference a la cédula de la Repúblic Dominicana
+     * @return returna el documento separado en un arreglo de String
      */
     public static String[] split(String documentId){
         return split(documentId,"-");
@@ -166,9 +174,9 @@ public final class Cedula {
      * Método utilitario para cuando necesites retornar la cédula separada en partes
      * espeficando el separador a utilizar.
      * 
-     * @param documentId
-     * @param sep
-     * @return 
+     * @param documentId numeración reference a la cédula de la Repúblic Dominicana
+     * @param sep separador a ser utilizado
+     * @return returna el documento separado en un arreglo de String
      */
     public static String[] split(String documentId, String sep){
         return documentId.split(sep);
