@@ -34,18 +34,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- *
+ * Clase Utilizada para manejar la información referente a provincias de la 
+ * República Dominicana.
+ * 
  * @author Carlos Vásquez Polanco
+ * @since 0.3.0
  */
 public class Provincias {
     
     private static final Request request = new Request();
 
     /**
+     * Listado de provincias de la República Dominiciana
      * 
-     * @return
-     * @throws RequesterInformationException
-     * @throws MalformedJSONException 
+     * @return ArrayList de objetos Provincia 
+     * @see Provincia
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
     public static ArrayList<Provincia> getList() 
             throws RequesterInformationException, MalformedJSONException{
@@ -84,11 +89,13 @@ public class Provincias {
     }
     
     /**
+     * Obtener la información de una provincia
      * 
-     * @param id
-     * @return
-     * @throws RequesterInformationException
-     * @throws MalformedJSONException 
+     * @param id id del objeto de provincia que se desea obtener
+     * @return objeto Provincia
+     * @see Provincia
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
     public static Provincia get(int id) 
             throws RequesterInformationException, MalformedJSONException{
@@ -108,13 +115,14 @@ public class Provincias {
     
     /**
      * 
-     * @param json
-     * @return
-     * @throws MalformedJSONException 
+     * @param json RAW del JSON recibido para ser formateado
+     * @return objeto Provincia
+     * @see Provincia
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
     private static Provincia getProvinciaObject(JSONObject json) 
             throws MalformedJSONException{
-        
+
         try {
             return new Provincia(json.getInt("id"), json.getString("nombre"));
         } catch (JSONException ex) {

@@ -35,8 +35,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- *
+ * Clase utilizada para manejar la información referente a Municipios de la 
+ * República Dominicana.
+ * 
+ * @see Municipio
+ * @see Provincia
  * @author Carlos Vásquez Polanco
+ * @since 0.4.0
  */
 public class Municipios {
     
@@ -44,9 +49,14 @@ public class Municipios {
 
     /**
      * 
-     * @return
-     * @throws RequesterInformationException
-     * @throws MalformedJSONException 
+     * Retorna una lista de objetos de tipo Municipio con la referencia al 
+     * objeto Provincia a la que pertenece.
+     * 
+     * @return ArrayList de objetos Municipio
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
+     * @see Municipio
+     * @see Provincia
      */
     public static ArrayList<Municipio> getList() 
             throws RequesterInformationException, MalformedJSONException{
@@ -85,11 +95,13 @@ public class Municipios {
     }
     
     /**
+     * Obtener la información de un municipio
      * 
-     * @param id
-     * @return
-     * @throws RequesterInformationException
-     * @throws MalformedJSONException 
+     * @param id id del objeto del Municipio que se desea obtener
+     * @return objeto Municipio
+     * @see Municipio
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
     public static Municipio get(int id) 
             throws RequesterInformationException, MalformedJSONException{
@@ -109,9 +121,11 @@ public class Municipios {
     
     /**
      * 
-     * @param json
-     * @return
-     * @throws MalformedJSONException 
+     * @param json RAW del JSON recibido para ser formateado
+     * @return objeto Municipio
+     * @see Municipio
+     * @see Provincia
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
     private static Municipio getMunicipioObject(JSONObject json) 
             throws MalformedJSONException{
@@ -120,10 +134,10 @@ public class Municipios {
             Municipio municipio = new Municipio(json.getInt("id"));
             municipio.setName(json.getString("nombre"));
              
-            JSONObject jsonObject = json.getJSONObject("provincia");
+            JSONObject jsonProvincia = json.getJSONObject("provincia");
              
-            Provincia provincia = new Provincia(jsonObject.getInt("id"));
-            provincia.setNombre(jsonObject.getString("nombre"));
+            Provincia provincia = new Provincia(jsonProvincia.getInt("id"));
+            provincia.setNombre(jsonProvincia.getString("nombre"));
             
             municipio.setProvincia(provincia);
 
