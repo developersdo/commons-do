@@ -34,32 +34,9 @@ import org.junit.Test;
  */
 public class CedulaTest {
     
-    private final String documentId = "001-1631145-7";
+    private final String documentId = "XXX-XXXXXXX-X";
     
     public CedulaTest() {
-    }
-
-    /**
-     * Verificación de si el método isValid method de la clase Cedula retorna true ante
-     * un documento válido.
-     * 
-     * @throws org.devdom.commons.exceptions.DocumentFormatException
-     */
-    @Test
-    public void testIsValid_StringArr() throws DocumentFormatException {
-        assertTrue("La cédula inválida",Cedula.isValid(documentId));
-    }
-
-    /**
-     * Verificación de si el método isValid method de la clase Cedula retorna true ante
-     * un documento válido pasado en 3 partes
-     * 
-     * @throws org.devdom.commons.exceptions.DocumentFormatException
-     */
-    @Test
-    public void testIsValid_3args() throws DocumentFormatException {
-        String[] partes = documentId.split("-");
-        assertTrue("La cédula inválida",Cedula.isValid(partes));
     }
     
 }
