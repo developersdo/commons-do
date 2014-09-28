@@ -30,7 +30,7 @@ import org.devdom.commons.exceptions.DocumentFormatException;
  * Clase para manejar validaciones y formatos de la cédula de la República Dominicana.
  * 
  * @author Carlos Vásquez Polanco
- * @see 0.0.1
+ * @since 0.0.1
  */
 public final class Cedula {
     
