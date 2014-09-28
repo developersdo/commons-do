@@ -22,24 +22,31 @@
  * THE SOFTWARE.
  */
 
-package org.devdom.commons.model.dto;
+package org.devdom.commons.dto;
 
 /**
  *
  * @author Carlos Vásquez Polanco
  */
-public class Provincia {
-
+public class Municipio {
+    
     private int id;
-    private String nombre;
+    private String name;
+    private Provincia provincia;
 
-    public Provincia(int id) {
+    public Municipio(int id) {
         this.id = id;
     }
 
-    public Provincia(int id, String nombre) {
+    public Municipio(int id, String name) {
         this.id = id;
-        this.nombre = nombre;
+        this.name = name;
+    }
+
+    public Municipio(int id, String name, Provincia provincia) {
+        this.id = id;
+        this.name = name;
+        this.provincia = provincia;
     }
 
     public int getId() {
@@ -50,17 +57,25 @@ public class Provincia {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
     }
 
     @Override
     public String toString() {
-        return "Provincia{" + "id=" + id + ", nombre=" + nombre + '}';
+        return "Municipio{" + "id=" + id + ", name=" + name + ", provincia=" + provincia.toString() + '}';
     }
-
+    
 }

@@ -26,7 +26,7 @@ package org.devdom.commons;
 
 import org.devdom.commons.exceptions.MalformedJSONException;
 import org.devdom.commons.exceptions.RequesterInformationException;
-import org.devdom.commons.model.dto.RNCObject;
+import org.devdom.commons.dto.RNCObject;
 import org.devdom.commons.util.Configuration;
 import org.json.JSONException;
 import org.json.JSONObject;

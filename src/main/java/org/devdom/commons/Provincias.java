@@ -27,7 +27,7 @@ package org.devdom.commons;
 import java.util.ArrayList;
 import org.devdom.commons.exceptions.MalformedJSONException;
 import org.devdom.commons.exceptions.RequesterInformationException;
-import org.devdom.commons.model.dto.Provincia;
+import org.devdom.commons.dto.Provincia;
 import org.devdom.commons.util.Configuration;
 import org.json.JSONArray;
 import org.json.JSONException;

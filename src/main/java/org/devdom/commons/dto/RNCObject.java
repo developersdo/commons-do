@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.devdom.commons.model.dto;
+package org.devdom.commons.dto;
 
 /**
  *
