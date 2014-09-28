@@ -28,13 +28,13 @@ package org.devdom.commons.exceptions;
  *
  * @author Carlos Vásquez Polanco
  */
-public class RncRequesterInformationException extends Exception{
+public class RequesterInformationException extends Exception{
     
-    public RncRequesterInformationException(String message){
+    public RequesterInformationException(String message){
         super(message);
     }
     
-    public RncRequesterInformationException(String message, Throwable cause){
+    public RequesterInformationException(String message, Throwable cause){
         super(message,cause);
     }
 }

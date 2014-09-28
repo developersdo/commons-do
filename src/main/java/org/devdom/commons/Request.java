@@ -31,7 +31,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import org.devdom.commons.exceptions.RncRequesterInformationException;
+import org.devdom.commons.exceptions.MalformedJSONException;
+import org.devdom.commons.exceptions.RequesterInformationException;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,48 +45,95 @@ public class Request {
 
     private HttpURLConnection conn;
     private URL url;
+    
+    /**
+     * 
+     * @param resourceLocation
+     * @return
+     * @throws RequesterInformationException
+     * @throws MalformedJSONException 
+     */
+    public JSONArray getJSONArrayResponse(String resourceLocation) 
+            throws RequesterInformationException, MalformedJSONException{
+    
+        String response = getResponse(resourceLocation);
 
-    protected JSONObject getResponse(String resourceLocation) throws RncRequesterInformationException {
+        if(!isValidJSONArrayString(response)){
+            throw new MalformedJSONException("La respuesta no es un objeto JSON válido");
+        }
+
+        return parseJSONArray(response);
+    }
+    
+    /**
+     * 
+     * @param resourceLocation
+     * @return
+     * @throws RequesterInformationException
+     * @throws MalformedJSONException 
+     */
+    public JSONObject getJSONObjectResponse(String resourceLocation) 
+            throws RequesterInformationException, MalformedJSONException {
+        
+        String response = getResponse(resourceLocation);
+
+        if(!isValidJSONObjectString(response)){
+            throw new MalformedJSONException("La respuesta no es un objeto JSON válido");
+        }
+
+        return parseJSONObject(response);
+
+    }
+    
+    /**
+     * 
+     * @param resourceLocation
+     * @return
+     * @throws RequesterInformationException 
+     */
+    protected String getResponse(String resourceLocation) 
+            throws RequesterInformationException {
 
         try {
             url = new URL(resourceLocation);
         } catch (MalformedURLException ex) {
-            throw new RncRequesterInformationException(ex.getMessage(),ex);
+            throw new RequesterInformationException(ex.getMessage(),ex);
         }
 
         try {
             conn = (HttpURLConnection) url.openConnection();
         } catch (IOException ex) {
-            throw new RncRequesterInformationException(ex.getMessage(),ex);
+            throw new RequesterInformationException(ex.getMessage(),ex);
         }
 
         try {
             conn.setRequestMethod("GET");
         } catch (ProtocolException ex) {
-            throw new RncRequesterInformationException(ex.getMessage(),ex);
+            throw new RequesterInformationException(ex.getMessage(),ex);
         }
 
         conn.setRequestProperty("Accept", "application/json");
 
         try{
             if (conn.getResponseCode() != 200) {
-                throw new RncRequesterInformationException("Http Error: "+conn.getResponseCode());
+                throw new RequesterInformationException("Http Error: "+conn.getResponseCode());
             }
         }catch(IOException ex){
-            throw new RncRequesterInformationException(ex.getMessage(),ex);
+            throw new RequesterInformationException(ex.getMessage(),ex);
         }
 
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     (conn.getInputStream())));
 
-            String output;
+            String outputString;
 
-            while ((output = br.readLine()) != null) {
-                return parse(output);
+            JSONArray ar;
+            while ((outputString = br.readLine()) != null) {
+                return outputString;
             }
         }catch(IOException ex){
-            throw new RncRequesterInformationException(ex.getMessage(),ex);
+            throw new RequesterInformationException(ex.getMessage(),ex);
         }
 
         conn.disconnect();
@@ -95,17 +144,49 @@ public class Request {
     /**
      * 
      * @param response
-     * @return
-     * @throws RncRequesterInformationException 
+     * @return 
+     * @throws org.devdom.commons.exceptions.MalformedJSONException 
      */
-    private JSONObject parse(String response) throws RncRequesterInformationException{
+    public JSONObject parseJSONObject(String response) 
+            throws MalformedJSONException{
 
         try {
             return (new JSONObject(response));
         } catch (JSONException ex) {
-            throw new RncRequesterInformationException(ex.getMessage(),ex);
+            throw new MalformedJSONException(ex.getMessage(),ex);
         }
-
     }
     
+    /**
+     * 
+     * @param response
+     * @return
+     * @throws MalformedJSONException 
+     */
+    public JSONArray parseJSONArray(String response) 
+            throws MalformedJSONException{
+        try {
+            return (new JSONArray(response));
+        } catch (JSONException ex) {
+            throw new MalformedJSONException(ex.getMessage(),ex);
+        }
+    }
+    /**
+     * 
+     * @param response
+     * @return 
+     */
+    public boolean isValidJSONArrayString(String response){
+        return (response.startsWith("[{"));
+    }
+    
+    /**
+     * 
+     * @param response
+     * @return 
+     */
+    public boolean isValidJSONObjectString(String response){
+        return (response.startsWith("{"));
+    }
+
 }
