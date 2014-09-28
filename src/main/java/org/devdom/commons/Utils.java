@@ -24,6 +24,11 @@
 
 package org.devdom.commons;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author Carlos Vásquez Polanco
@@ -37,6 +42,48 @@ public class Utils {
      */
     public static boolean hasOnlyDigits(String value){
         return value.matches("[0-9]+");
+    }
+    
+    /**
+     * 
+     * @param date
+     * @return 
+     */
+    public static String getDateFormatted(Date date){
+        return getDateFormatted(date, "dd/MM/yyyy");
+    }
+    
+    /**
+     * 
+     * @param date
+     * @param format
+     * @return 
+     */
+    public static String getDateFormatted(Date date, String format){
+        DateFormat formatter = new SimpleDateFormat(format);
+        return formatter.format(date);
+    }
+
+    /**
+     * 
+     * @param date
+     * @return
+     * @throws ParseException 
+     */
+    public static Date convertStringToDate(String date) throws ParseException{
+        return convertStringToDate(date,"yyyy-MM-dd");
+    }
+    
+    /**
+     * 
+     * @param date
+     * @param format
+     * @return
+     * @throws ParseException 
+     */
+    public static Date convertStringToDate(String date, String format) throws ParseException{
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.parse(date);
     }
 
 }

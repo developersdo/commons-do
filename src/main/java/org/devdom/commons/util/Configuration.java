@@ -38,4 +38,7 @@ public interface Configuration {
     
     String DATA_MUNICIPIOS_URL = DATA_DEVDO_URL_V1 + "municipios";
 
+    String DATA_FERIADOS_URL = DATA_DEVDO_URL_V1 + "feriados";
+    
+    //http://data.developers.do/api/v1/feriados/2014.json
 }
