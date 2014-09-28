@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.devdom</groupId>
     <artifactId>commons-do</artifactId>
-    <version>0.5.0</version>
+    <version>0.5.1</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,4 +70,5 @@
             <url>https://oss.sonatype.org/content/repositories/jetty-releases</url>
         </repository>        
     </repositories>
+    <description>Inspirado por http://data.developers.do se creó un API para consumir la data expuesta en http://data.developers.do</description>
 </project>

@@ -46,6 +46,8 @@ public class Utils {
     
     /**
      * 
+     * Extraer fecha formateada
+     * 
      * @param date
      * @return 
      */
@@ -54,6 +56,8 @@ public class Utils {
     }
     
     /**
+     * 
+     * Extraer fecha formateada, indicando cual es el formato 
      * 
      * @param date
      * @param format
@@ -66,6 +70,8 @@ public class Utils {
 
     /**
      * 
+     * Método utilizado para convertir un objeto Strign en un objeto fecha. 
+     * 
      * @param date
      * @return
      * @throws ParseException 
@@ -75,6 +81,9 @@ public class Utils {
     }
     
     /**
+     * 
+     * Método utilizado para convertir un objeto Strign en un objeto fecha 
+     * indicando el formato en el segundo parámetro.
      * 
      * @param date
      * @param format
