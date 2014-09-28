@@ -38,5 +38,16 @@ public class CedulaTest {
     
     public CedulaTest() {
     }
+
+    /**
+     * Verificación de si el método isValid method de la clase Cedula retorna true ante
+     * un documento válido.
+     * 
+     * @throws org.devdom.commons.exceptions.DocumentFormatException
+     */
+    @Test
+    public void testIsValid_StringArr() throws DocumentFormatException {
+        assertTrue("La cédula inválida",Cedula.isValid(documentId));
+    }
     
 }
