@@ -22,18 +22,45 @@
  * THE SOFTWARE.
  */
 
-package org.devdom.commons.util;
+package org.devdom.commons.model.dto;
 
 /**
  *
  * @author Carlos Vásquez Polanco
  */
-public interface Configuration {
-    
-    String DATA_DEVDO_URL_V1 = "http://data.developers.do/api/v1/";
-    
-    String DATA_RNC_URL = DATA_DEVDO_URL_V1 + "empresas/";
-    
-    String DATA_PROVINCIAS_URL = DATA_DEVDO_URL_V1 + "provincias";
+public class Provincia {
+
+    private int id;
+    private String nombre;
+
+    public Provincia(int id) {
+        this.id = id;
+    }
+
+    public Provincia(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Provincia{" + "id=" + id + ", nombre=" + nombre + '}';
+    }
 
 }
