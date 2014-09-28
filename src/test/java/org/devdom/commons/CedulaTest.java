@@ -34,7 +34,8 @@ import org.junit.Test;
  */
 public class CedulaTest {
     
-    private final String documentId = "XXX-XXXXXXX-X";
+    private final String documentIdFormatted = "XXX-XXXXXXX-X";
+    private final String documentId = "XXXXXXXXXXX";
     
     public CedulaTest() {
     }
@@ -47,7 +48,7 @@ public class CedulaTest {
      */
     @Test
     public void testIsValid_StringArr() throws DocumentFormatException {
-        assertTrue("La cédula inválida",Cedula.isValid(documentId));
+        assertTrue("La cédula inválida",Cedula.isValid(documentIdFormatted));
     }
 
     /**
@@ -58,8 +59,17 @@ public class CedulaTest {
      */
     @Test
     public void testIsValid_3args() throws DocumentFormatException {
-        String[] partes = documentId.split("-");
+        String[] partes = documentIdFormatted.split("-");
         assertTrue("La cédula inválida",Cedula.isValid(partes));
+    }
+    
+    @Test
+    public void testMask(){
+        
+        String testDocumentId = Cedula.mask(documentIdFormatted);
+        
+        assertTrue("La cédula no pudo ser enmascarada", testDocumentId.contains("-"));
+                
     }
     
 }
