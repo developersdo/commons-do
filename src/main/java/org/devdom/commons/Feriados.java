@@ -41,6 +41,7 @@ import org.json.JSONObject;
  * para el año en curso.
  * 
  * @author Carlos Vásquez Polanco
+ * @see Feriado
  * @since 0.5.1
  */
 public class Feriados {
