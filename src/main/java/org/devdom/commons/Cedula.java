@@ -48,7 +48,8 @@ public final class Cedula {
      * @return 
      * @throws org.devdom.commons.exceptions.DocumentFormatException 
      */
-    public static boolean isValid(String[] part) throws DocumentFormatException{
+    public static boolean isValid(String[] part) 
+            throws DocumentFormatException{
         
         int len = part.length;
         String documentId = ""; 
@@ -75,7 +76,8 @@ public final class Cedula {
      * @return
      * @throws DocumentFormatException 
      */
-    public static boolean isValid(String part1, String part2, String part3) throws DocumentFormatException{
+    public static boolean isValid(String part1, String part2, String part3) 
+            throws DocumentFormatException{
 
         String documentId = part1+part2+part3;
         
@@ -91,7 +93,8 @@ public final class Cedula {
      * @return
      * @throws DocumentFormatException 
      */
-    public static boolean isValid(String documentId) throws DocumentFormatException{
+    public static boolean isValid(String documentId) 
+            throws DocumentFormatException{
 
         final char[] weight = {'1','2','1','2','1','2','1','2','1','2'};
         int mod = 0;
