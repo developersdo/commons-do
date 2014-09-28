@@ -38,8 +38,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- *
+ * Clase para manejar las peticiones al API de http://data.developers.do
+ * 
  * @author Carlos Vásquez Polanco
+ * @since 0.0.1
  */
 public class Request {
 
@@ -47,11 +49,15 @@ public class Request {
     private URL url;
     
     /**
+     * <p>Obtener un JSONArray a partir de la llamada al API de http://data.developers.do
      * 
-     * @param resourceLocation
-     * @return
-     * @throws RequesterInformationException
-     * @throws MalformedJSONException 
+     * <p>Aun así, el método puede ser utilizado para llamar recursos desde otros 
+     * recursos siempre que retornen un JSON.
+     * 
+     * @param resourceLocation URL del recurso a ser consultado 
+     * @return Objeto JSONArray
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
     public JSONArray getJSONArrayResponse(String resourceLocation) 
             throws RequesterInformationException, MalformedJSONException{
@@ -66,11 +72,15 @@ public class Request {
     }
     
     /**
+     * <p>Obtener un JSONObject a partir de la llamada al API de http://data.developers.do
      * 
-     * @param resourceLocation
-     * @return
-     * @throws RequesterInformationException
-     * @throws MalformedJSONException 
+     * <p>Aun así, el método puede ser utilizado para llamar recursos desde otros 
+     * recursos siempre que retornen un JSON.
+     * 
+     * @param resourceLocation URL del recurso a ser consultado 
+     * @return Objeto JSONObject
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
     public JSONObject getJSONObjectResponse(String resourceLocation) 
             throws RequesterInformationException, MalformedJSONException {
@@ -86,10 +96,14 @@ public class Request {
     }
     
     /**
+     * <p>Obtener un String a partir de la llamada al API de http://data.developers.do
      * 
-     * @param resourceLocation
-     * @return
-     * @throws RequesterInformationException 
+     * <p>Aun así, el método puede ser utilizado para llamar recursos desde otros 
+     * recursos siempre que retornen un JSON.
+     * 
+     * @param resourceLocation URL del recurso a ser consultado 
+     * @return RAW String
+     * @throws RequesterInformationException si hubo error en la recepción de información
      */
     protected String getResponse(String resourceLocation) 
             throws RequesterInformationException {
@@ -142,10 +156,11 @@ public class Request {
     }
     
     /**
-     * 
+     * Convetir a objeto JSONObject un string
      * @param response
-     * @return 
-     * @throws org.devdom.commons.exceptions.MalformedJSONException 
+     * @return Objeto JSONObject
+     * @see JSONObject
+     * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
     public JSONObject parseJSONObject(String response) 
             throws MalformedJSONException{
@@ -158,9 +173,10 @@ public class Request {
     }
     
     /**
-     * 
+     * Convertir a objeto JSONAray un string
      * @param response
-     * @return
+     * @return objeto JSONArray
+     * @see JSONArray
      * @throws MalformedJSONException 
      */
     public JSONArray parseJSONArray(String response) 
@@ -172,18 +188,20 @@ public class Request {
         }
     }
     /**
+     * Validar si el string suplido puede ser un JSONArray válido
      * 
      * @param response
-     * @return 
+     * @return boolean
      */
     public boolean isValidJSONArrayString(String response){
         return (response.startsWith("[{"));
     }
     
     /**
+     * Validar si el string suplido puede ser un JSONObject válido
      * 
      * @param response
-     * @return 
+     * @return boolean
      */
     public boolean isValidJSONObjectString(String response){
         return (response.startsWith("{"));
