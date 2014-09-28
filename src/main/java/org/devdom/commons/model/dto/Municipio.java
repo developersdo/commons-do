@@ -22,20 +22,60 @@
  * THE SOFTWARE.
  */
 
-package org.devdom.commons.util;
+package org.devdom.commons.model.dto;
 
 /**
  *
  * @author Carlos Vásquez Polanco
  */
-public interface Configuration {
+public class Municipio {
     
-    String DATA_DEVDO_URL_V1 = "http://data.developers.do/api/v1/";
-    
-    String DATA_RNC_URL = DATA_DEVDO_URL_V1 + "empresas/";
-    
-    String DATA_PROVINCIAS_URL = DATA_DEVDO_URL_V1 + "provincias";
-    
-    String DATA_MUNICIPIOS_URL = DATA_DEVDO_URL_V1 + "municipios";
+    private int id;
+    private String name;
+    private Provincia provincia;
 
+    public Municipio(int id) {
+        this.id = id;
+    }
+
+    public Municipio(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Municipio(int id, String name, Provincia provincia) {
+        this.id = id;
+        this.name = name;
+        this.provincia = provincia;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
+    }
+
+    @Override
+    public String toString() {
+        return "Municipio{" + "id=" + id + ", name=" + name + ", provincia=" + provincia.toString() + '}';
+    }
+    
 }
