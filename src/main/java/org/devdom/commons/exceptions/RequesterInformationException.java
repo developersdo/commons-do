@@ -31,7 +31,9 @@ package org.devdom.commons.exceptions;
  * @since 0.0.1
  */
 public class RequesterInformationException extends Exception{
-    
+
+    private static final long serialVersionUID = 8252298840518426119L;
+
     public RequesterInformationException(String message){
         super(message);
     }

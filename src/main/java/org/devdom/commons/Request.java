@@ -28,8 +28,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import org.devdom.commons.exceptions.MalformedJSONException;
 import org.devdom.commons.exceptions.RequesterInformationException;
@@ -95,6 +93,13 @@ public class Request {
 
     }
     
+    private void setConnection(String uri) throws IOException {
+        url = new URL(uri);
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Accept", "application/json");
+    }
+    
     /**
      * <p>Obtener un String a partir de la llamada al API de http://data.developers.do
      * 
@@ -109,50 +114,30 @@ public class Request {
             throws RequesterInformationException {
 
         try {
-            url = new URL(resourceLocation);
-        } catch (MalformedURLException ex) {
-            throw new RequesterInformationException(ex.getMessage(),ex);
-        }
-
-        try {
-            conn = (HttpURLConnection) url.openConnection();
-        } catch (IOException ex) {
-            throw new RequesterInformationException(ex.getMessage(),ex);
-        }
-
-        try {
-            conn.setRequestMethod("GET");
-        } catch (ProtocolException ex) {
-            throw new RequesterInformationException(ex.getMessage(),ex);
-        }
-
-        conn.setRequestProperty("Accept", "application/json");
-
-        try{
+            setConnection(resourceLocation);
             if (conn.getResponseCode() != 200) {
                 throw new RequesterInformationException("Http Error: "+conn.getResponseCode());
             }
-        }catch(IOException ex){
-            throw new RequesterInformationException(ex.getMessage(),ex);
+        } catch (IOException e) {
+            throw new RequesterInformationException(e.getMessage(),e);
         }
-
+        
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     (conn.getInputStream())));
 
+            StringBuilder output = new StringBuilder();
             String outputString;
 
-            JSONArray ar;
             while ((outputString = br.readLine()) != null) {
-                return outputString;
+                output.append(outputString);
             }
+            return output.toString();
         }catch(IOException ex){
             throw new RequesterInformationException(ex.getMessage(),ex);
+        } finally {
+            conn.disconnect();
         }
-
-        conn.disconnect();
-
-        return null;
     }
     
     /**
