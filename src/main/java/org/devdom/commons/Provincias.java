@@ -25,9 +25,12 @@
 package org.devdom.commons;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.devdom.commons.exceptions.MalformedJSONException;
 import org.devdom.commons.exceptions.RequesterInformationException;
 import org.devdom.commons.dto.Provincia;
+import org.devdom.commons.type.FormatType;
 import org.devdom.commons.util.Configuration;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,9 +43,11 @@ import org.json.JSONObject;
  * @author Carlos Vásquez Polanco
  * @since 0.3.0
  */
-public class Provincias {
+public class Provincias extends Listable<Provincia> {
     
-    private static final Request request = new Request();
+    public Provincias() {
+        super(Configuration.DATA_PROVINCIAS_URL, "UTF-8");
+    }
 
     /**
      * Listado de provincias de la República Dominiciana
@@ -52,18 +57,15 @@ public class Provincias {
      * @throws RequesterInformationException si hubo error en la recepción de información
      * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
-    public static ArrayList<Provincia> getList() 
-            throws RequesterInformationException, MalformedJSONException{
+    public List<Provincia> getList() 
+            throws RequesterInformationException {
 
-        String url = Configuration.DATA_PROVINCIAS_URL + ".json";
         ArrayList<Provincia> list = new ArrayList<Provincia>();
-        
-        
-        String json = request.getResponse(url);
+        String json = getResponse(buildURL(FormatType.JSON));
         
         //Verificar el formato de la información retornada para parsearla
-        if(request.isValidJSONArrayString(json)){
-            JSONArray jsonArray = request.parseJSONArray(json);
+        if(isValidJSONArrayString(json)){
+            JSONArray jsonArray = parseJSONArray(json);
             int len = jsonArray.length();
             
             /*
@@ -80,8 +82,8 @@ public class Provincias {
                 }
             }
 
-        }else if(request.isValidJSONObjectString(json)){
-            JSONObject jsonObject = request.parseJSONObject(json);
+        }else if(isValidJSONObjectString(json)){
+            JSONObject jsonObject = parseJSONObject(json);
             list.add(getProvinciaObject(jsonObject));
         }
 
@@ -97,19 +99,17 @@ public class Provincias {
      * @throws RequesterInformationException si hubo error en la recepción de información
      * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
-    public static Provincia get(int id) 
+    public Provincia get(String id) 
             throws RequesterInformationException, MalformedJSONException{
         
-        String url = Configuration.DATA_PROVINCIAS_URL +"/"+ id + ".json";
+        String json = getResponse(buildURL(FormatType.JSON, id));
         
-        String json = request.getResponse(url);
-        
-        if(request.isValidJSONArrayString(json)){
+        if(isValidJSONArrayString(json)){
             // si la llamada retorna más de un elemento, da un error de documento mal formado
             throw new MalformedJSONException();
         }
         
-        return getProvinciaObject( request.parseJSONObject(json) );
+        return getProvinciaObject(parseJSONObject(json) );
 
     }
     

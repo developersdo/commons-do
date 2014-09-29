@@ -25,6 +25,7 @@
 package org.devdom.commons;
 
 import org.devdom.commons.exceptions.DocumentFormatException;
+import org.devdom.commons.util.Utils;
 
 /**
  * Clase para manejar validaciones y formatos de la cédula de la República Dominicana.
@@ -146,7 +147,7 @@ public final class Cedula {
         final int len = words.length;
 
         if(len != 11){
-            throw new DocumentFormatException("Logitud de cédula incorrecta");
+            throw new DocumentFormatException("Longitud de cédula incorrecta");
         }
         
         for(int i=0; i<len;i++){

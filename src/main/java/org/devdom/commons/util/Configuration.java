@@ -31,14 +31,14 @@ package org.devdom.commons.util;
  */
 public interface Configuration {
     
-    String DATA_DEVDO_URL_V1 = "http://data.developers.do/api/v1/";
+    public final String DATA_DEVDO_URL_V1 = "http://data.developers.do/api/v1/";
     
-    String DATA_RNC_URL = DATA_DEVDO_URL_V1 + "empresas/";
+    public final String DATA_RNC_URL = DATA_DEVDO_URL_V1 + "empresas/";
     
-    String DATA_PROVINCIAS_URL = DATA_DEVDO_URL_V1 + "provincias";
+    public final String DATA_PROVINCIAS_URL = DATA_DEVDO_URL_V1 + "provincias";
     
-    String DATA_MUNICIPIOS_URL = DATA_DEVDO_URL_V1 + "municipios";
+    public final String DATA_MUNICIPIOS_URL = DATA_DEVDO_URL_V1 + "municipios";
 
-    String DATA_FERIADOS_URL = DATA_DEVDO_URL_V1 + "feriados";
+    public final String DATA_FERIADOS_URL = DATA_DEVDO_URL_V1 + "feriados";
 
 }

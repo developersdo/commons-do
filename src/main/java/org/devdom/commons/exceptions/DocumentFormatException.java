@@ -33,6 +33,7 @@ package org.devdom.commons.exceptions;
  */
 public class DocumentFormatException extends Exception{
     
+    private static final long serialVersionUID = 8252298660518426119L;
     public DocumentFormatException(String message){
         super(message);
     }

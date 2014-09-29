@@ -4,14 +4,21 @@ import java.util.List;
 
 import org.devdom.commons.dto.Feriado;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FeriadosTest {
+    Feriados feriadosService;
+    
+    @Before
+    public void setup() {
+        feriadosService = new Feriados();
+    }
     
     @Test
     public void getAll() {
         try {
-            List<Feriado> feriados = Feriados.getList();
+            List<Feriado> feriados = feriadosService.getList();
             Assert.assertTrue("Lista de feriados null para el presente año", feriados != null);
             Assert.assertTrue("Lista de feriados vacía para el presente año", feriados.size() > 0);
         } catch (Exception e) {
