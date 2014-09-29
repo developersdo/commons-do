@@ -28,9 +28,8 @@ package org.devdom.commons.dto;
  *
  * @author Carlos Vásquez Polanco
  */
-public class Provincia {
+public class Provincia extends BaseModel {
 
-    private int id;
     private String nombre;
 
     public Provincia(int id) {
@@ -40,14 +39,6 @@ public class Provincia {
     public Provincia(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombre() {

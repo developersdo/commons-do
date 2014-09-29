@@ -24,13 +24,13 @@
 
 package org.devdom.commons.dto;
 
+
 /**
  *
  * @author Carlos Vásquez Polanco
  */
-public class Municipio {
+public class Municipio extends BaseModel {
     
-    private int id;
     private String name;
     private Provincia provincia;
 
@@ -47,14 +47,6 @@ public class Municipio {
         this.id = id;
         this.name = name;
         this.provincia = provincia;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
