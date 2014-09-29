@@ -28,10 +28,14 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 import org.devdom.commons.dto.Feriado;
 import org.devdom.commons.exceptions.MalformedJSONException;
 import org.devdom.commons.exceptions.RequesterInformationException;
+import org.devdom.commons.type.FormatType;
 import org.devdom.commons.util.Configuration;
+import org.devdom.commons.util.Utils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,10 +48,11 @@ import org.json.JSONObject;
  * @see Feriado
  * @since 0.5.1
  */
-public class Feriados {
+public class Feriados extends Listable<Feriado> {
     
-    private static final Request request = new Request();
-
+    public Feriados() {
+        super(Configuration.DATA_FERIADOS_URL, "UTF-8");
+    }
     /**
      * 
      * Listado de días feriados según el Ministerio de Trabajo de la República Dominicana
@@ -58,8 +63,8 @@ public class Feriados {
      * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      * @throws ParseException si hubo error de parseo
      */
-    public static ArrayList<Feriado> getList() 
-            throws RequesterInformationException, MalformedJSONException, ParseException{
+    @Override
+    public List<Feriado> getList() throws RequesterInformationException, ParseException{
         
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -83,35 +88,27 @@ public class Feriados {
      * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      * @throws ParseException si hubo error de parseo 
      */
-    public static ArrayList<Feriado> getList(int year) 
-            throws RequesterInformationException, MalformedJSONException, ParseException{
+    public List<Feriado> getList(int year) 
+            throws RequesterInformationException, ParseException{
 
-        String url = Configuration.DATA_FERIADOS_URL + "/" + year + ".json";
-        ArrayList<Feriado> list = new ArrayList<Feriado>();
-
-        String json = request.getResponse(url);
+        String json = getResponse(buildURL(FormatType.JSON, String.valueOf(year)));
+        List<Feriado> list = new ArrayList<Feriado>();
         
         //Verificar el formato de la información retornada para parsearla
-        if(request.isValidJSONArrayString(json)){
-            JSONArray jsonArray = request.parseJSONArray(json);
-            int len = jsonArray.length();
-            
-            /*
-            Extraer todos los objetos y convertirlos a entidades de tipo feriado
-            para añadirlos a la lista.
-            */
-            for(int i = 0; i<len; i++){
-                try{
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    list.add(getFeriadoObject(jsonObject));
-                    
-                }catch(JSONException ex){
-                    throw new MalformedJSONException(ex.getMessage(),ex);
-                }
+        JSONArray jsonArray = parseJSONArray(json);
+        int len = jsonArray.length();
+        
+        /*
+        Extraer todos los objetos y convertirlos a entidades de tipo feriado
+        para añadirlos a la lista.
+        */
+        for(int i = 0; i<len; i++){
+            try{
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                list.add(getFeriadoObject(jsonObject));
+            }catch(JSONException ex){
+                throw new MalformedJSONException(ex.getMessage(),ex);
             }
-
-        }else{
-            throw new MalformedJSONException();
         }
 
         return list;
@@ -130,14 +127,14 @@ public class Feriados {
      * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      * @throws ParseException si hubo error de parseo
      */
-    public static boolean isTodayHoliday() 
-            throws RequesterInformationException, MalformedJSONException, ParseException{
+    public boolean isTodayHoliday() 
+            throws RequesterInformationException, ParseException{
         
         Calendar calendar = Calendar.getInstance();
         String currentDateString = Utils.getDateFormatted( calendar.getTime() );
         int year = calendar.get(Calendar.YEAR);
        
-        ArrayList<Feriado> list = Feriados.getList(year);
+        List<Feriado> list = getList(year);
         
         for(Feriado feriado : list){
             Date holiday = feriado.getFechaMovido();
@@ -169,18 +166,19 @@ public class Feriados {
 
         try {
             int id = json.getInt("id");
-            String fechaOriginalString = json.getString("fecha_original");
-            String fechaMovidoString = json.getString("fecha_movido");
-            
-            Date fechaOriginal = json.isNull("fecha_original") ? null : Utils.convertStringToDate(fechaOriginalString);
-            Date fechaMovido = json.isNull("fecha_movido") ? null : Utils.convertStringToDate(fechaMovidoString);
-
+            Date fechaOriginal = json.isNull("fecha_original") ? null : Utils.convertStringToDate(json.getString("fecha_original"));
+            Date fechaMovido = json.isNull("fecha_movido") ? null : Utils.convertStringToDate(json.getString("fecha_movido"));
             String motivo = json.getString("motivo");
 
             return new Feriado(id,fechaOriginal,fechaMovido, motivo);
         } catch (JSONException ex) {
             throw new MalformedJSONException(ex.getMessage(),ex);
         }
+    }
+    
+    public Feriado get(String id) throws RequesterInformationException, ParseException {
+        // TODO to be implemented
+        return null;
     }
     
 }

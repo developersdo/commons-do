@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.devdom.commons;
+package org.devdom.commons.util;
 
 import java.text.DateFormat;
 import java.text.ParseException;
