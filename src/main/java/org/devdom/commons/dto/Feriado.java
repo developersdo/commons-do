@@ -82,7 +82,7 @@ public class Feriado {
 
     @Override
     public String toString() {
-        return "Feriado{" + "id=" + id + ", fechaOriginal=" + fechaOriginal + ", fechaMovido=" + fechaMovido + ", motivo=" + motivo + '}';
+        return String.format("Feriado{id=%s, fechaOriginal=%s, fechaMovido=%s, motivo=%s}", id, fechaOriginal, fechaMovido, motivo);
     }
 
 }
