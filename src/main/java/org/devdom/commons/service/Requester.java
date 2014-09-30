@@ -30,6 +30,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import org.devdom.commons.exceptions.RequesterInformationException;
+import org.devdom.commons.type.FormatType;
 
 /**
  * Clase para manejar las peticiones al API de http://data.developers.do
@@ -47,12 +48,20 @@ public class Requester {
         this.charset = charset;
     }
 
-    private void setConnection(String uri, String charset) throws IOException {
+    private void setConnection(String uri, String charset, FormatType type) throws IOException {
         url = new URL(uri);
         conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("Accept-Charset", charset);
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("Accept", "application/json");
+        switch (type) {
+            case XML:
+                conn.setRequestProperty("Accept", "application/xml");
+                break;
+            case JSON:
+            default:
+                conn.setRequestProperty("Accept", "application/json");        
+        }
+        
     }
     
     /**
@@ -66,7 +75,11 @@ public class Requester {
      * @throws RequesterInformationException si hubo error en la recepción de información
      */
     protected String getResponse(String resourceLocation) throws RequesterInformationException {
-        return getResponse(resourceLocation, charset);
+        return getResponse(resourceLocation, charset, FormatType.JSON);
+    }
+    
+    protected String getResponse(String resourceLocation, FormatType type) throws RequesterInformationException {
+        return getResponse(resourceLocation, charset, type);
     }
     
     /**
@@ -80,11 +93,11 @@ public class Requester {
      * @return RAW String
      * @throws RequesterInformationException si hubo error en la recepción de información
      */
-    protected String getResponse(String resourceLocation, String charset) 
+    protected String getResponse(String resourceLocation, String charset, FormatType type) 
             throws RequesterInformationException {
 
         try {
-            setConnection(resourceLocation, charset);
+            setConnection(resourceLocation, charset, type);
             if (conn.getResponseCode() != 200) {
                 throw new RequesterInformationException("Http Error: "+conn.getResponseCode());
             }
