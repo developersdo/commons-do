@@ -187,6 +187,7 @@ public class Feriados extends Listable<Feriado> {
      * 
      * @param id posición de día feriado
      * @return Objeto Feriado
+     * @see Feriado
      * @throws RequesterInformationException si hubo error en la recepción de información
      * @throws ParseException si hubo error de parseo
      */
@@ -204,6 +205,7 @@ public class Feriados extends Listable<Feriado> {
      * @param id posición de día feriado
      * @param year año deseado
      * @return Objeto Feriado
+     * @see Feriado
      * @throws RequesterInformationException si hubo error en la recepción de información
      * @throws ParseException si hubo error de parseo
      */
@@ -218,10 +220,25 @@ public class Feriados extends Listable<Feriado> {
         return null;
     }
 
+    /**
+     * Obtener objeto Feriado según la posición solicitada
+     * 
+     * @param id posición de día feriado
+     * @return Objeto Feriado
+     * @see Feriado
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws ParseException si hubo error de parseo
+     * @throws NumberFormatException si hubo un intento de pasar caracteres por valores numéricos
+     */
     @Override
-    public Feriado get(String id) throws RequesterInformationException, ParseException {
-        // TODO to be implemented
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Feriado get(String id) 
+            throws RequesterInformationException, ParseException, NumberFormatException {
+        
+        if(!Utils.hasOnlyDigits(id)){
+            throw new NumberFormatException("Solo se permiten dígitos");
+        }
+        
+        return get(Integer.parseInt(id));
     }
     
 }
