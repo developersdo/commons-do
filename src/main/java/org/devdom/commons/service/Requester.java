@@ -41,7 +41,7 @@ public class Requester {
 
     private HttpURLConnection conn;
     private URL url;
-    private String charset;
+    private final String charset;
     
     public Requester(String charset) {
         this.charset = charset;

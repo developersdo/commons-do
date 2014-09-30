@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.devdom.commons.dto.Feriado;
 import org.devdom.commons.exceptions.MalformedJSONException;
@@ -116,7 +117,7 @@ public class Feriados extends Listable<Feriado> {
     
     /**
      * 
-     * <p>Método utilizado para saber si día en curso es feriado.
+     * <p>Método utilizado para saber si el día en curso es feriado.
      * 
      * <p>Primero es verificada la fecha a la que fue movida por disposición
      * de la ley Dominicana. Si la fecha festiva no es movida se revisa su fecha
@@ -130,10 +131,11 @@ public class Feriados extends Listable<Feriado> {
     public boolean isTodayHoliday() 
             throws RequesterInformationException, ParseException{
         
-        Calendar calendar = Calendar.getInstance();
-        String currentDateString = Utils.getDateFormatted( calendar.getTime() );
+        TimeZone timeZone = TimeZone.getTimeZone(Configuration.DR_TIME_ZONE);
+        Calendar calendar = Calendar.getInstance(timeZone);
+        int currentDayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
         int year = calendar.get(Calendar.YEAR);
-       
+
         List<Feriado> list = getList(year);
         
         for(Feriado feriado : list){
@@ -142,10 +144,14 @@ public class Feriados extends Listable<Feriado> {
             if(holiday==null){
                 holiday = feriado.getFechaOriginal();
             }
-            
-            String holidayString = Utils.getDateFormatted(holiday);
 
-            return (currentDateString.equals(holidayString));
+            Calendar holidayCalendar = Calendar.getInstance();
+            holidayCalendar.setTime(holiday);
+            int holidayDayOfYear = holidayCalendar.get(Calendar.DAY_OF_YEAR);
+
+            if(currentDayOfYear == holidayDayOfYear){
+                return true;
+            }
 
         }
         return false;
@@ -176,9 +182,63 @@ public class Feriados extends Listable<Feriado> {
         }
     }
     
-    public Feriado get(String id) throws RequesterInformationException, ParseException {
-        // TODO to be implemented
+    /**
+     * Obtener objeto Feriado según la posición solicitada
+     * 
+     * @param id posición de día feriado
+     * @return Objeto Feriado
+     * @see Feriado
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws ParseException si hubo error de parseo
+     */
+    public Feriado get(int id) 
+            throws RequesterInformationException, ParseException {
+        
+        Calendar calendar = Calendar.getInstance();
+        
+        return this.get(id, calendar.get(Calendar.YEAR));
+    }
+    
+    /**
+     * Obtener objeto Feriado según la posición solicitada
+     * 
+     * @param id posición de día feriado
+     * @param year año deseado
+     * @return Objeto Feriado
+     * @see Feriado
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws ParseException si hubo error de parseo
+     */
+    public Feriado get(int id, int year) 
+            throws RequesterInformationException, ParseException{
+        
+        for(Feriado feriado : this.getList(year)){
+            if(feriado.getId()==id){
+                return feriado;
+            }
+        }
         return null;
+    }
+
+    /**
+     * Obtener objeto Feriado según la posición solicitada
+     * 
+     * @param id posición de día feriado
+     * @return Objeto Feriado
+     * @see Feriado
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws ParseException si hubo error de parseo
+     * @throws NumberFormatException si hubo un intento de pasar caracteres por valores numéricos
+     */
+    @Override
+    public Feriado get(String id) 
+            throws RequesterInformationException, ParseException, NumberFormatException {
+        
+        if(!Utils.hasOnlyDigits(id)){
+            throw new NumberFormatException("Solo se permiten dígitos");
+        }
+        
+        return get(Integer.parseInt(id));
     }
     
 }

@@ -28,9 +28,7 @@ public class BaseModel {
         if (getClass() != obj.getClass())
             return false;
         BaseModel other = (BaseModel) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return id == other.id;
     }
     
     

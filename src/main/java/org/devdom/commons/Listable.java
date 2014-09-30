@@ -22,7 +22,7 @@ public abstract class Listable<T> extends JsonGetter<T> {
      * <p>Aun así, el método puede ser utilizado para llamar recursos desde otros 
      * recursos siempre que retornen un JSON.
      * 
-     * @param resourceLocation URL del recurso a ser consultado 
+     * @param response
      * @return Objeto JSONArray
      * @throws RequesterInformationException si hubo error en la recepción de información
      * @throws MalformedJSONException si hubo error en el formato o validación del JSON
