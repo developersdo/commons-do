@@ -182,6 +182,42 @@ public class Feriados extends Listable<Feriado> {
         }
     }
     
+    /**
+     * Obtener objeto Feriado según la posición solicitada
+     * 
+     * @param id posición de día feriado
+     * @return Objeto Feriado
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws ParseException si hubo error de parseo
+     */
+    public Feriado get(int id) 
+            throws RequesterInformationException, ParseException {
+        
+        Calendar calendar = Calendar.getInstance();
+        
+        return this.get(id, calendar.get(Calendar.YEAR));
+    }
+    
+    /**
+     * Obtener objeto Feriado según la posición solicitada
+     * 
+     * @param id posición de día feriado
+     * @param year año deseado
+     * @return Objeto Feriado
+     * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws ParseException si hubo error de parseo
+     */
+    public Feriado get(int id, int year) 
+            throws RequesterInformationException, ParseException{
+        
+        for(Feriado feriado : this.getList(year)){
+            if(feriado.getId()==id){
+                return feriado;
+            }
+        }
+        return null;
+    }
+
     @Override
     public Feriado get(String id) throws RequesterInformationException, ParseException {
         // TODO to be implemented
