@@ -59,6 +59,7 @@ public class Municipios extends Listable<Municipio> {
      * 
      * @return ArrayList de objetos Municipio
      * @throws RequesterInformationException si hubo error en la recepción de información
+     * @throws java.text.ParseException
      * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      * @see Municipio
      * @see Provincia
@@ -103,6 +104,7 @@ public class Municipios extends Listable<Municipio> {
      * 
      * @param id id del objeto del Municipio que se desea obtener
      * @return objeto Municipio
+     * @throws java.text.ParseException
      * @see Municipio
      * @throws RequesterInformationException si hubo error en la recepción de información
      * @throws MalformedJSONException si hubo error en el formato o validación del JSON
