@@ -24,9 +24,11 @@
 
 package org.devdom.commons;
 
+
 import org.devdom.commons.exceptions.MalformedJSONException;
 import org.devdom.commons.exceptions.RequesterInformationException;
 import org.devdom.commons.dto.RNCObject;
+import org.devdom.commons.type.FormatType;
 import org.devdom.commons.util.Configuration;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,36 +37,36 @@ import org.json.JSONObject;
  *
  * @author Carlos Vásquez Polanco
  */
-public class Rnc {
+public class Rnc extends JsonGetter<RNCObject> {
+
+    public Rnc(String baseUri, String charset) {
+        super(Configuration.DATA_RNC_URL, "UTF-8");
+    }
 
     /**
      * Ontener información a partir de una numeración de RNC
      * 
-     * @param documentId
+     * @param id
      * @return RNCObject
      * @see RNCObject con información de empresa en República Dominicana
      * @throws RequesterInformationException si hubo error en la recepción de información
      * @throws MalformedJSONException si hubo error en el formato o validación del JSON
      */
-    public static RNCObject getInformation(String documentId) 
-            throws RequesterInformationException, MalformedJSONException{
+    public RNCObject get(String id) 
+            throws RequesterInformationException {
 
-        String url = Configuration.DATA_RNC_URL + documentId + ".json";
-        
-        Request request = new Request();
-        
-        JSONObject json = request.getJSONObjectResponse(url);
+        JSONObject json = getJSONObjectResponse(buildURL(FormatType.JSON, id));
         
         try{
             
-            String id = json.getString("id");
+            String objectId = json.getString("id");
             String document = json.getString("rnc");
             String name = json.getString("nombre");
             
-            return new RNCObject(id,document,name);
-            
+            return new RNCObject(objectId,document,name);
         }catch(JSONException ex){
             throw new RequesterInformationException(ex.getMessage(),ex);
         }
-    }    
+    }
+
 }

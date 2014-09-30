@@ -34,8 +34,10 @@ package org.devdom.commons.exceptions;
  * @author Carlos Vásquez Polanco
  * @since 0.3.1
  */
-public class MalformedJSONException extends Exception{
+public class MalformedJSONException extends RuntimeException {
     
+    private static final long serialVersionUID = 8252298540518426119L;
+
     /**
      * Mensaje por defecto al capturar una exception "<i>documento JSON mal formado</i>"
      * 

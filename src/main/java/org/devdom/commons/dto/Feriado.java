@@ -30,9 +30,8 @@ import java.util.Date;
  *
  * @author Carlos Vásquez Polanco
  */
-public class Feriado {
+public class Feriado extends BaseModel {
     
-    private int id;
     private Date fechaOriginal;
     private Date fechaMovido;
     private String motivo;
@@ -46,14 +45,6 @@ public class Feriado {
         this.fechaOriginal = fechaOriginal;
         this.fechaMovido = fechaMovido;
         this.motivo = motivo;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Date getFechaOriginal() {
@@ -82,7 +73,7 @@ public class Feriado {
 
     @Override
     public String toString() {
-        return "Feriado{" + "id=" + id + ", fechaOriginal=" + fechaOriginal + ", fechaMovido=" + fechaMovido + ", motivo=" + motivo + '}';
+        return String.format("Feriado{id=%s, fechaOriginal=%s, fechaMovido=%s, motivo=%s}", id, fechaOriginal, fechaMovido, motivo);
     }
 
 }
