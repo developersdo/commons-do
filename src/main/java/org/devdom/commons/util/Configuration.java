@@ -40,5 +40,7 @@ public interface Configuration {
     public final String DATA_MUNICIPIOS_URL = DATA_DEVDO_URL_V1 + "municipios";
 
     public final String DATA_FERIADOS_URL = DATA_DEVDO_URL_V1 + "feriados";
+    
+    public final String DR_TIME_ZONE = "Etc/GMT+4";
 
 }
