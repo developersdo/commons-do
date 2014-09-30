@@ -1,7 +1,8 @@
 package org.devdom.commons.type;
 
 public enum FormatType {
-    JSON(".json");
+    JSON(".json"),
+    XML(".xml");
     
     private final String extension;
 
