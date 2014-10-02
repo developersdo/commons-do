@@ -22,27 +22,37 @@
  * THE SOFTWARE.
  */
 
-package org.devdom.commons.util;
+package org.devdom.commons.exceptions;
 
 /**
  *
  * @author Carlos Vásquez Polanco
- * @since 0.0.1
+ * @since 0.6.5
  */
-public interface Configuration {
+public class MalformedXMLException extends Exception{
     
-    public final String DATA_DEVDO_URL_V1 = "http://data.developers.do/api/v1/";
-    
-    public final String DATA_RNC_URL = DATA_DEVDO_URL_V1 + "empresas/";
-    
-    public final String DATA_PROVINCIAS_URL = DATA_DEVDO_URL_V1 + "provincias";
-    
-    public final String DATA_MUNICIPIOS_URL = DATA_DEVDO_URL_V1 + "municipios";
+    /**
+     * Mensaje por defecto al capturar una exception "<i>documento XML mal formado</i>"
+     */
+    public MalformedXMLException(){
+        super("Documento XML mal formado");
+    }
 
-    public final String DATA_FERIADOS_URL = DATA_DEVDO_URL_V1 + "feriados";
+    /**
+     * 
+     * @param message 
+     */
+    public MalformedXMLException(String message){
+        super(message);
+    }
     
-    public final String DR_TIME_ZONE = "Etc/GMT+4";
+    /**
+     * 
+     * @param message
+     * @param cause 
+     */
+    public MalformedXMLException(String message, Throwable cause){
+        super(message,cause);
+    }
     
-    public final String RSS_COMBUSTIBLES = "http://www.seic.gov.do/rss/combustibles.aspx";
-
 }
