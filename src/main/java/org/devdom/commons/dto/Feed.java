@@ -41,7 +41,7 @@ public class Feed {
     private String copyright;
     private String guid;
     /**
-     * Especiales del MIC
+     * Especiales del Ministerio de Industria y Comercio de la República Dominicana
      */
     private String gas95;
     private String gas89;

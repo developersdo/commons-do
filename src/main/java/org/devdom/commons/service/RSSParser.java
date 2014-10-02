@@ -77,7 +77,7 @@ public class RSSParser{
     }
 
     /**
-     * 
+     * Método utilizado para extraer el valor de un campo
      * @param event
      * @param eventReader
      * @return
@@ -94,6 +94,15 @@ public class RSSParser{
         return result;
     }
     
+    /**
+     * Método utilizado par retornar el valor de un campo dado el objeto Feed
+     * y el campo que se desea evaluar
+     * 
+     * @see Feed
+     * @param feed Objeto que almacena las respuestas de un RSS
+     * @param item campo que se desea retornar
+     * @return String del valor del campo suplido
+     */
     public String getProperty(Feed feed, String item){
         
         if(item.equals(Gasolina.GASOIL_PREMIUM)){
@@ -127,12 +136,14 @@ public class RSSParser{
     }
 
     /**
+     *      * Método utilizado para asingar un valor dado el objeto Feed, el campo y el
+     * objeto que se de sea asignar 
      * 
-     * @param event
-     * @param item
-     * @param field
-     * @return
-     * @throws MalformedXMLException 
+     * 
+     * @param feed objeto Feed que será alterado
+     * @param item item al cual se desea asignar el valor
+     * @param value valor del campo que se desea asignar 
+     * @see Feed
      */
     private void setProperty(Feed feed, String item, String value) {
 
@@ -166,6 +177,8 @@ public class RSSParser{
     }
 
     /**
+     * Método utilizado para obtener un Objeto feed recorriendo los resultado 
+     * obtenidos al llamar un RSS
      * 
      * @return
      * @throws MalformedXMLException 

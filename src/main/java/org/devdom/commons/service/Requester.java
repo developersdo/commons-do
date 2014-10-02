@@ -90,7 +90,9 @@ public class Requester {
      * 
      * @param resourceLocation URL del recurso a ser consultado
      * @param charset Character set to use to interpret the response from server
+     * @param type tipo de documento que se desea obtener
      * @return RAW String
+     * @see FormatType
      * @throws RequesterInformationException si hubo error en la recepción de información
      */
     protected String getResponse(String resourceLocation, String charset, FormatType type) 
