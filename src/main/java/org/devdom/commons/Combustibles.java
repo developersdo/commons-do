@@ -34,7 +34,7 @@ import org.devdom.commons.exceptions.MalformedXMLException;
  * @author Carlos Vásquez Polanco
  * @since 0.6.7
  */
-public class Gasolina {
+public class Combustibles {
     
     private final RSSParser parser;
     private final Feed feed;
@@ -51,7 +51,7 @@ public class Gasolina {
      * 
      * @throws MalformedXMLException 
      */
-    public Gasolina() throws MalformedXMLException {
+    public Combustibles() throws MalformedXMLException {
         this.parser = new RSSParser();
         feed = parser.getResult();
     }
@@ -89,19 +89,19 @@ public class Gasolina {
     }
     
     /**
-     * Obtener el precio de la Gasolina Premium en la República Dominicana
+     * Obtener el precio de la Combustibles Premium en la República Dominicana
      * @return 
      */
     public double getCurrentGasolinaPremiumPrice(){
-        return get(Gasolina.GASOIL_PREMIUM);
+        return get(Combustibles.GASOIL_PREMIUM);
     }
     
     /**
-     * Obtener el precio de la Gasolina Regular en la República Dominicana
+     * Obtener el precio de la Combustibles Regular en la República Dominicana
      * @return 
      */
     public double getCurrentGasolinaRegularPrice(){
-        return get(Gasolina.GASOIL_REGULAR);
+        return get(Combustibles.GASOIL_REGULAR);
     }
     
     /**
@@ -109,7 +109,7 @@ public class Gasolina {
      * @return 
      */
     public double getCurrentGasoilPremiumPrice(){
-        return get(Gasolina.GASOIL_PREMIUM);
+        return get(Combustibles.GASOIL_PREMIUM);
     }
     
     /**
@@ -117,7 +117,7 @@ public class Gasolina {
      * @return 
      */
     public double getCurrentGasoilRegularPrice(){
-        return get(Gasolina.GASOIL_REGULAR);
+        return get(Combustibles.GASOIL_REGULAR);
     }
     
     /**
@@ -125,7 +125,7 @@ public class Gasolina {
      * @return 
      */
     public double getCurrentKerosenePrice(){
-        return get(Gasolina.KEROSENE);
+        return get(Combustibles.KEROSENE);
     }
     
     /**
@@ -133,7 +133,7 @@ public class Gasolina {
      * @return 
      */
     public double getCurrentGasLicuadoDePetroleo(){
-        return get(Gasolina.GAS_LICUADO_DE_PETROLEO);
+        return get(Combustibles.GAS_LICUADO_DE_PETROLEO);
     }
     
     /**
@@ -141,7 +141,7 @@ public class Gasolina {
      * @return 
      */
     public double getCurrentGasNautralVehicular(){
-        return get(Gasolina.GAS_NATURAL_VEHICULAR);
+        return get(Combustibles.GAS_NATURAL_VEHICULAR);
     }
 
 }

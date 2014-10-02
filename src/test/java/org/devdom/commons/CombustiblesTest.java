@@ -35,21 +35,21 @@ import org.junit.Test;
  *
  * @author Carlos Vásquez Polanco
  */
-public class GasolinaTest {
+public class CombustiblesTest {
     
-    private Gasolina gasolina;
+    private Combustibles gasolina;
     private Feed feed;
     
-    public GasolinaTest() {
+    public CombustiblesTest() {
     }
     
     @Before
     public void setUp() throws MalformedXMLException {
-        gasolina = new Gasolina();
+        gasolina = new Combustibles();
     }
 
     /**
-     * Test of getCurrentPrices method, of class Gasolina.
+     * Test of getCurrentPrices method, of class Combustibles.
      */
     @Test
     public void testGetCurrentPrices() {
@@ -59,19 +59,19 @@ public class GasolinaTest {
     }
 
     /**
-     * Test of getCurrentGasolinaPremiumPrice method, of class Gasolina.
+     * Test of getCurrentGasolinaPremiumPrice method, of class Combustibles.
      */
     @Test
     public void testGetCurrentGasolinaPremiumPrice() {
-        assertTrue("No retornó precio para la gasolina premium", gasolina.get(Gasolina.GASOLINA_PREMIUM)>0);
+        assertTrue("No retornó precio para la gasolina premium", gasolina.get(Combustibles.GASOLINA_PREMIUM)>0);
     }
 
     /**
-     * Test of getCurrentGasolinaRegularPrice method, of class Gasolina.
+     * Test of getCurrentGasolinaRegularPrice method, of class Combustibles.
      */
     @Test
     public void testGetCurrentGasolinaRegularPrice() {
-        assertTrue("No retornó precio para la gasolina regular", gasolina.get(Gasolina.GASOLINA_REGULAR)>0);
+        assertTrue("No retornó precio para la gasolina regular", gasolina.get(Combustibles.GASOLINA_REGULAR)>0);
     }
     
 }

@@ -32,7 +32,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
-import org.devdom.commons.Gasolina;
+import org.devdom.commons.Combustibles;
 import org.devdom.commons.dto.Feed;
 import org.devdom.commons.exceptions.MalformedXMLException;
 import org.devdom.commons.util.Configuration;
@@ -105,27 +105,27 @@ public class RSSParser{
      */
     public String getProperty(Feed feed, String item){
         
-        if(item.equals(Gasolina.GASOIL_PREMIUM)){
+        if(item.equals(Combustibles.GASOIL_PREMIUM)){
             return feed.getGasoilp();
         }
 
-        if(item.equals(Gasolina.GASOIL_REGULAR)){
+        if(item.equals(Combustibles.GASOIL_REGULAR)){
             return feed.getGasoilr();
         }
 
-        if(item.equals(Gasolina.GASOLINA_PREMIUM)){
+        if(item.equals(Combustibles.GASOLINA_PREMIUM)){
             return feed.getGas95();
         }
 
-        if(item.equals(Gasolina.GASOLINA_REGULAR)){
+        if(item.equals(Combustibles.GASOLINA_REGULAR)){
             return feed.getGas89();
         }
 
-        if(item.equals(Gasolina.GAS_LICUADO_DE_PETROLEO)){
+        if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO)){
             return feed.getGlp();
         }
 
-        if(item.equals(Gasolina.GAS_NATURAL_VEHICULAR)){
+        if(item.equals(Combustibles.GAS_NATURAL_VEHICULAR)){
             return feed.getGnv();
         }
 
@@ -147,27 +147,27 @@ public class RSSParser{
      */
     private void setProperty(Feed feed, String item, String value) {
 
-        if(item.equals(Gasolina.GASOIL_PREMIUM)){
+        if(item.equals(Combustibles.GASOIL_PREMIUM)){
             feed.setGasoilp(value);
         }
 
-        if(item.equals(Gasolina.GASOIL_REGULAR)){
+        if(item.equals(Combustibles.GASOIL_REGULAR)){
             feed.setGasoilr(value);
         }
 
-        if(item.equals(Gasolina.GASOLINA_PREMIUM)){
+        if(item.equals(Combustibles.GASOLINA_PREMIUM)){
             feed.setGas95(value);
         }
 
-        if(item.equals(Gasolina.GASOLINA_REGULAR)){
+        if(item.equals(Combustibles.GASOLINA_REGULAR)){
             feed.setGas89(value);
         }
 
-        if(item.equals(Gasolina.GAS_LICUADO_DE_PETROLEO)){
+        if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO)){
             feed.setGlp(value);
         }
 
-        if(item.equals(Gasolina.GAS_NATURAL_VEHICULAR)){
+        if(item.equals(Combustibles.GAS_NATURAL_VEHICULAR)){
             feed.setGnv(value);
         }
 
