@@ -29,8 +29,9 @@ package org.devdom.commons.exceptions;
  * @author Carlos Vásquez Polanco
  * @since 0.6.5
  */
-public class MalformedXMLException extends Exception{
+public class MalformedXMLException extends RuntimeException {
     
+    private static final long serialVersionUID = 8252398540518426119L;
     /**
      * Mensaje por defecto al capturar una exception "<i>documento XML mal formado</i>"
      */
