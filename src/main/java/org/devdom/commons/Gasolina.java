@@ -29,7 +29,8 @@ import org.devdom.commons.dto.Feed;
 import org.devdom.commons.exceptions.MalformedXMLException;
 
 /**
- *
+ * Clase utilizada para obtener los precios de los carburantes en la República Dominicana
+ * 
  * @author Carlos Vásquez Polanco
  * @since 0.6.7
  */
@@ -56,7 +57,8 @@ public class Gasolina {
     }
     
     /**
-     * 
+     * Obtener objeto Feed con los precios actuales
+     * @see Feed
      * @return 
      */
     public Feed getCurrentPrices(){
@@ -64,6 +66,7 @@ public class Gasolina {
     }
     
     /**
+     * Obtener el precio de un carburante dado el campo que desea ser evaluado
      * 
      * @param item
      * @return 
@@ -77,34 +80,66 @@ public class Gasolina {
         return Double.parseDouble(parser.getProperty(feed, item));
     }
     
+    /**
+     * Obtener el títuto usado en el RSS por el Ministerio de Industria y Comercio
+     * @return 
+     */
     public String getTitle(){
         return feed.getTitle();
     }
     
+    /**
+     * Obtener el precio de la Gasolina Premium en la República Dominicana
+     * @return 
+     */
     public double getCurrentGasolinaPremiumPrice(){
         return get(Gasolina.GASOIL_PREMIUM);
     }
     
+    /**
+     * Obtener el precio de la Gasolina Regular en la República Dominicana
+     * @return 
+     */
     public double getCurrentGasolinaRegularPrice(){
         return get(Gasolina.GASOIL_REGULAR);
     }
     
+    /**
+     * Obtener el precio del Gasoil Premium en la República Dominicana
+     * @return 
+     */
     public double getCurrentGasoilPremiumPrice(){
         return get(Gasolina.GASOIL_PREMIUM);
     }
     
+    /**
+     * Obtener el precio del Gasoil Regular en la República Dominicana
+     * @return 
+     */
     public double getCurrentGasoilRegularPrice(){
         return get(Gasolina.GASOIL_REGULAR);
     }
     
+    /**
+     * Obtener el precio del Kerosene en la República Dominicana
+     * @return 
+     */
     public double getCurrentKerosenePrice(){
         return get(Gasolina.KEROSENE);
     }
     
+    /**
+     * Obtener el precio del Gas Licuado De Petroleo en la República Dominicana
+     * @return 
+     */
     public double getCurrentGasLicuadoDePetroleo(){
         return get(Gasolina.GAS_LICUADO_DE_PETROLEO);
     }
     
+    /**
+     * Obtener el precio del Gas Natural Vehicular en la República Dominicana
+     * @return 
+     */
     public double getCurrentGasNautralVehicular(){
         return get(Gasolina.GAS_NATURAL_VEHICULAR);
     }
