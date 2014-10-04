@@ -107,19 +107,19 @@ public class RSSParser{
     public String getProperty(Combustible combustible, String item){
         
         if(item.equals(Combustibles.GASOIL_PREMIUM_LABEL)){
-            return combustible.getGasoilp();
+            return combustible.getGasoilPremium();
         }
 
         if(item.equals(Combustibles.GASOIL_REGULAR_LABEL)){
-            return combustible.getGasoilr();
+            return combustible.getGasoilRegular();
         }
 
         if(item.equals(Combustibles.GASOLINA_PREMIUM_LABEL)){
-            return combustible.getGas95();
+            return combustible.getGasolinaPremium();
         }
 
         if(item.equals(Combustibles.GASOLINA_REGULAR_LABEL)){
-            return combustible.getGas89();
+            return combustible.getGasolinaRegular();
         }
 
         if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO_LABEL)){
@@ -149,19 +149,19 @@ public class RSSParser{
     private void setProperty(Combustible combustible, String item, String value) {
 
         if(item.equals(Combustibles.GASOIL_PREMIUM_LABEL)){
-            combustible.setGasoilp(value);
+            combustible.setGasoilPremium(value);
         }
 
         if(item.equals(Combustibles.GASOIL_REGULAR_LABEL)){
-            combustible.setGasoilr(value);
+            combustible.setGasoilRegular(value);
         }
 
         if(item.equals(Combustibles.GASOLINA_PREMIUM_LABEL)){
-            combustible.setGas95(value);
+            combustible.setGasolinaPremium(value);
         }
 
         if(item.equals(Combustibles.GASOLINA_REGULAR_LABEL)){
-            combustible.setGas89(value);
+            combustible.setGasolinaRegular(value);
         }
 
         if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO_LABEL)){
