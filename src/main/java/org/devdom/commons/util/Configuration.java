@@ -43,6 +43,9 @@ public interface Configuration {
     
     public final String DR_TIME_ZONE = "Etc/GMT+4";
     
-    public final String RSS_COMBUSTIBLES = "http://www.seic.gov.do/rss/combustibles.aspx";
+    public final String SEIC_GOV_URL = "http://www.seic.gov.do/";
+    
+    public final String RSS_COMBUSTIBLES = SEIC_GOV_URL + "rss/combustibles.aspx";
 
+    public final String XML_LISTADO_COMBUSTIBLES = SEIC_GOV_URL + "hidrocarburos/precios-de-combustibles.aspx";
 }
