@@ -26,8 +26,9 @@ package org.devdom.commons;
 
 import org.devdom.commons.dto.Combustible;
 import org.devdom.commons.service.RSSParser;
-import org.devdom.commons.dto.Feed;
-import org.devdom.commons.exceptions.MalformedXMLException;
+import org.devdom.commons.service.XMLParser;
+import org.devdom.commons.exceptions.DocumentFormatException;
+import java.util.ArrayList;
 
 /**
  * Clase utilizada para obtener los precios de los carburantes en la República Dominicana
@@ -53,20 +54,20 @@ public class Combustibles {
     public static final int GAS_LICUADO_DE_PETROLEO = 5;
     public static final int GAS_NATURAL_VEHICULAR = 6;
 
-    private final RSSParser parser = new RSSParser();
-    private final Combustible combustible = parser.getResult();
+    private final Combustible combustible;
+    private final RSSParser rssParser = new RSSParser();    
+    private final XMLParser xmlParser = new XMLParser();
 
     /**
      * 
-     * @throws MalformedXMLException 
      */
     public Combustibles() {
-        
+        combustible = rssParser.getResult();
     }
 
     /**
-     * Obtener objeto Feed con los precios actuales
-     * @see Feed
+     * Obtener objeto Combustible con los precios actuales
+     * @see Combustible
      * @return 
      */
     public Combustible getCurrentPrices(){
@@ -74,10 +75,24 @@ public class Combustibles {
     }
     
     /**
+     * Obtener histórico de los precios de los combustibles de la República Dominicana
+     * 
+     * @return ArrayList de objetos Combustibble
+     * @see Combustible
+     * @see ArrayList
+     * @throws DocumentFormatException si se pasan valores incorrectos o fuera de longitud
+     */
+    public ArrayList<Combustible> getHistoricalList() 
+            throws DocumentFormatException{
+
+        return xmlParser.getCombustibles();
+    }
+    
+    /**
      * Obtener el precio de un carburante dado el campo que desea ser evaluado
      * 
-     * @param item
-     * @return 
+     * @param item campo a ser evaluado
+     * @return valor
      */
     public double get(String item){
         
@@ -85,12 +100,13 @@ public class Combustibles {
             throw new NumberFormatException("title no puede ser retornado por esta vía");
         }
 
-        return Double.parseDouble(parser.getProperty(combustible, item));
+        return Double.parseDouble(rssParser.getProperty(combustible, item));
     }
     
     /**
      * Obtener el títuto usado en el RSS por el Ministerio de Industria y Comercio
-     * @return 
+     * 
+     * @return titulo para la semana
      */
     public String getTitle(){
         return combustible.getTitle();
@@ -98,7 +114,7 @@ public class Combustibles {
     
     /**
      * Obtener el precio de la Combustibles Premium en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasolinaPremiumPrice(){
         return get(Combustibles.GASOIL_PREMIUM_LABEL);
@@ -106,7 +122,7 @@ public class Combustibles {
     
     /**
      * Obtener el precio de la Combustibles Regular en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasolinaRegularPrice(){
         return get(Combustibles.GASOIL_REGULAR_LABEL);
@@ -114,7 +130,7 @@ public class Combustibles {
     
     /**
      * Obtener el precio del Gasoil Premium en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasoilPremiumPrice(){
         return get(Combustibles.GASOIL_PREMIUM_LABEL);
@@ -122,7 +138,7 @@ public class Combustibles {
     
     /**
      * Obtener el precio del Gasoil Regular en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasoilRegularPrice(){
         return get(Combustibles.GASOIL_REGULAR_LABEL);
@@ -130,7 +146,7 @@ public class Combustibles {
     
     /**
      * Obtener el precio del Kerosene en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentKerosenePrice(){
         return get(Combustibles.KEROSENE_LABEL);
@@ -138,7 +154,7 @@ public class Combustibles {
     
     /**
      * Obtener el precio del Gas Licuado De Petroleo en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasLicuadoDePetroleo(){
         return get(Combustibles.GAS_LICUADO_DE_PETROLEO_LABEL);
@@ -146,7 +162,7 @@ public class Combustibles {
     
     /**
      * Obtener el precio del Gas Natural Vehicular en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasNautralVehicular(){
         return get(Combustibles.GAS_NATURAL_VEHICULAR_LABEL);
