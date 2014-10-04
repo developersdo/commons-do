@@ -24,7 +24,9 @@ package org.devdom.commons.dto;
  * THE SOFTWARE.
  */
 /**
- *
+ * Entidad para expresar los precios variantes de los combustibles expresados por 
+ * semana.
+ * 
  * @author Carlos Vásquez Polanco
  * @since 0.7.8
  */
@@ -32,104 +34,191 @@ public class Combustible {
 
     private String title;
     private String pubDate;
-    private String gas95;
-    private String gas89;
-    private String gasoilp;
-    private String gasoilr;
+    private String gasolinaPremium;
+    private String gasolinaRegular;
+    private String gasoilPremium;
+    private String gasoilRegular;
     private String kerosene;
     private String glp;
     private String gnv;
 
+    /**
+     *
+     */
     public Combustible() {
     }
 
-    public Combustible(String title, String pubDate, String gas95, String gas89, String gasoilp, String gasoilr, String kerosene, String glp, String gnv) {
+    /**
+     *
+     * @param title
+     * @param pubDate
+     * @param gasolinaPremium
+     * @param gasolinaRegular
+     * @param gasoilPremium
+     * @param gasoilRegular
+     * @param kerosene
+     * @param glp
+     * @param gnv
+     */
+    public Combustible(String title, String pubDate, String gasolinaPremium, String gasolinaRegular, String gasoilPremium, String gasoilRegular, String kerosene, String glp, String gnv) {
         this.title = title;
         this.pubDate = pubDate;
-        this.gas95 = gas95;
-        this.gas89 = gas89;
-        this.gasoilp = gasoilp;
-        this.gasoilr = gasoilr;
+        this.gasolinaPremium = gasolinaPremium;
+        this.gasolinaRegular = gasolinaRegular;
+        this.gasoilPremium = gasoilPremium;
+        this.gasoilRegular = gasoilRegular;
         this.kerosene = kerosene;
         this.glp = glp;
         this.gnv = gnv;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     *
+     * @param title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPubDate() {
         return pubDate;
     }
 
+    /**
+     *
+     * @param pubDate
+     */
     public void setPubDate(String pubDate) {
         this.pubDate = pubDate;
     }
 
-    public String getGas95() {
-        return gas95;
+    /**
+     *
+     * @return
+     */
+    public String getGasolinaPremium() {
+        return gasolinaPremium;
     }
 
-    public void setGas95(String gas95) {
-        this.gas95 = gas95;
+    /**
+     *
+     * @param gasolinaPremium
+     */
+    public void setGasolinaPremium(String gasolinaPremium) {
+        this.gasolinaPremium = gasolinaPremium;
     }
 
-    public String getGas89() {
-        return gas89;
+    /**
+     *
+     * @return
+     */
+    public String getGasolinaRegular() {
+        return gasolinaRegular;
     }
 
-    public void setGas89(String gas89) {
-        this.gas89 = gas89;
+    /**
+     *
+     * @param gasolinaRegular
+     */
+    public void setGasolinaRegular(String gasolinaRegular) {
+        this.gasolinaRegular = gasolinaRegular;
     }
 
-    public String getGasoilp() {
-        return gasoilp;
+    /**
+     *
+     * @return
+     */
+    public String getGasoilPremium() {
+        return gasoilPremium;
     }
 
-    public void setGasoilp(String gasoilp) {
-        this.gasoilp = gasoilp;
+    /**
+     *
+     * @param gasoilPremium
+     */
+    public void setGasoilPremium(String gasoilPremium) {
+        this.gasoilPremium = gasoilPremium;
     }
 
-    public String getGasoilr() {
-        return gasoilr;
+    /**
+     *
+     * @return
+     */
+    public String getGasoilRegular() {
+        return gasoilRegular;
     }
 
-    public void setGasoilr(String gasoilr) {
-        this.gasoilr = gasoilr;
+    /**
+     *
+     * @param gasoilRegular
+     */
+    public void setGasoilRegular(String gasoilRegular) {
+        this.gasoilRegular = gasoilRegular;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getKerosene() {
         return kerosene;
     }
 
+    /**
+     *
+     * @param kerosene
+     */
     public void setKerosene(String kerosene) {
         this.kerosene = kerosene;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGlp() {
         return glp;
     }
 
+    /**
+     *
+     * @param glp
+     */
     public void setGlp(String glp) {
         this.glp = glp;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGnv() {
         return gnv;
     }
 
+    /**
+     *
+     * @param gnv
+     */
     public void setGnv(String gnv) {
         this.gnv = gnv;
     }
 
     @Override
     public String toString() {
-        return "Combustible{" + "title=" + title + ", pubDate=" + pubDate + ", gas95=" + gas95 + ", gas89=" + gas89 + ", gasoilp=" + gasoilp + ", gasoilr=" + gasoilr + ", kerosene=" + kerosene + ", glp=" + glp + ", gnv=" + gnv + '}';
+        return "Combustible{" + "title=" + title + ", pubDate=" + pubDate + ", gasolinaPremium=" + gasolinaPremium + ", gasolinaRegular=" + gasolinaRegular + ", gasoilPremium=" + gasoilPremium + ", gasoilRegular=" + gasoilRegular + ", kerosene=" + kerosene + ", glp=" + glp + ", gnv=" + gnv + '}';
     }
 
 }

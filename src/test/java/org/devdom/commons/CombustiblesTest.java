@@ -24,7 +24,7 @@
 
 package org.devdom.commons;
 
-import org.devdom.commons.dto.Feed;
+import org.devdom.commons.dto.Combustible;
 import org.devdom.commons.exceptions.MalformedXMLException;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -38,11 +38,18 @@ import org.junit.Test;
 public class CombustiblesTest {
     
     private Combustibles gasolina;
-    private Feed feed;
+    private Combustible combustible;
     
+    /**
+     *
+     */
     public CombustiblesTest() {
     }
     
+    /**
+     *
+     * @throws MalformedXMLException
+     */
     @Before
     public void setUp() throws MalformedXMLException {
         gasolina = new Combustibles();
@@ -53,9 +60,10 @@ public class CombustiblesTest {
      */
     @Test
     public void testGetCurrentPrices() {
-        feed = gasolina.getCurrentPrices();
-        assertNotNull("El objeto retornó nulo", feed);
-        assertTrue("No retornó precios válidos", ( Double.parseDouble(feed.getGas89()) > 0) );
+        combustible = gasolina.getCurrentPrices();
+
+        assertNotNull("El objeto retornó nulo", combustible);
+        assertTrue("No retornó precios válidos", ( Double.parseDouble(combustible.getGasolinaRegular()) > 0) );
     }
 
     /**
@@ -63,7 +71,7 @@ public class CombustiblesTest {
      */
     @Test
     public void testGetCurrentGasolinaPremiumPrice() {
-        assertTrue("No retornó precio para la gasolina premium", gasolina.get(Combustibles.GASOLINA_PREMIUM)>0);
+        assertTrue("No retornó precio para la gasolina premium", gasolina.get(Combustibles.GASOLINA_PREMIUM_LABEL)>0);
     }
 
     /**
@@ -71,7 +79,7 @@ public class CombustiblesTest {
      */
     @Test
     public void testGetCurrentGasolinaRegularPrice() {
-        assertTrue("No retornó precio para la gasolina regular", gasolina.get(Combustibles.GASOLINA_REGULAR)>0);
+        assertTrue("No retornó precio para la gasolina regular", gasolina.get(Combustibles.GASOLINA_REGULAR_LABEL)>0);
     }
     
 }
