@@ -24,6 +24,7 @@
 
 package org.devdom.commons;
 
+import org.devdom.commons.dto.Combustible;
 import org.devdom.commons.service.RSSParser;
 import org.devdom.commons.dto.Feed;
 import org.devdom.commons.exceptions.MalformedXMLException;
@@ -36,9 +37,6 @@ import org.devdom.commons.exceptions.MalformedXMLException;
  */
 public class Combustibles {
     
-    private final RSSParser parser;
-    private final Feed feed;
-    
     public static final String GASOLINA_PREMIUM = "gas95";
     public static final String GASOLINA_REGULAR = "gas89";
     public static final String GASOIL_PREMIUM = "gasoilp";
@@ -46,14 +44,20 @@ public class Combustibles {
     public static final String KEROSENE = "kerosene";
     public static final String GAS_LICUADO_DE_PETROLEO = "glp";
     public static final String GAS_NATURAL_VEHICULAR= "gnv";
+    private RSSParser parser;
+    private Combustible combustible;
 
     /**
      * 
      * @throws MalformedXMLException 
      */
-    public Combustibles() throws MalformedXMLException {
+    public Combustibles() {
+        
+    }
+    
+    public void getRSSParser(){
         this.parser = new RSSParser();
-        feed = parser.getResult();
+        combustible = parser.getResult();
     }
     
     /**
@@ -61,8 +65,8 @@ public class Combustibles {
      * @see Feed
      * @return 
      */
-    public Feed getCurrentPrices(){
-        return feed;
+    public Combustible getCurrentPrices(){
+        return combustible;
     }
     
     /**
@@ -77,7 +81,7 @@ public class Combustibles {
             throw new NumberFormatException("title no puede ser retornado por esta vía");
         }
         
-        return Double.parseDouble(parser.getProperty(feed, item));
+        return Double.parseDouble(parser.getProperty(combustible, item));
     }
     
     /**
@@ -85,7 +89,7 @@ public class Combustibles {
      * @return 
      */
     public String getTitle(){
-        return feed.getTitle();
+        return combustible.getTitle();
     }
     
     /**

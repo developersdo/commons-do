@@ -30,6 +30,7 @@ package org.devdom.commons.dto;
  */
 public class Combustible {
 
+    private String title;
     private String pubDate;
     private String gas95;
     private String gas89;
@@ -51,6 +52,14 @@ public class Combustible {
         this.kerosene = kerosene;
         this.glp = glp;
         this.gnv = gnv;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getPubDate() {
