@@ -40,16 +40,6 @@ public class Feed {
     private String language;
     private String copyright;
     private String guid;
-    /**
-     * Especiales del Ministerio de Industria y Comercio de la República Dominicana
-     */
-    private String gas95;
-    private String gas89;
-    private String gasoilp;
-    private String gasoilr;
-    private String kerosene;
-    private String glp;
-    private String gnv;
 
     public Feed(){
     
@@ -67,17 +57,6 @@ public class Feed {
         this.language = language;
         this.copyright = copyright;
 
-    }
-
-    public Feed(String guid, String gas95, String gas89, String gasoilp, String gasoilr, String kerosene, String glp, String gnv) {
-        this.guid = guid;
-        this.gas95 = gas95;
-        this.gas89 = gas89;
-        this.gasoilp = gasoilp;
-        this.gasoilr = gasoilr;
-        this.kerosene = kerosene;
-        this.glp = glp;
-        this.gnv = gnv;
     }
 
     public String getTitle() {
@@ -136,65 +115,9 @@ public class Feed {
         this.guid = guid;
     }
 
-    public String getGas95() {
-        return gas95;
-    }
-
-    public void setGas95(String gas95) {
-        this.gas95 = gas95;
-    }
-
-    public String getGas89() {
-        return gas89;
-    }
-
-    public void setGas89(String gas89) {
-        this.gas89 = gas89;
-    }
-
-    public String getGasoilp() {
-        return gasoilp;
-    }
-
-    public void setGasoilp(String gasoilp) {
-        this.gasoilp = gasoilp;
-    }
-
-    public String getGasoilr() {
-        return gasoilr;
-    }
-
-    public void setGasoilr(String gasoilr) {
-        this.gasoilr = gasoilr;
-    }
-
-    public String getKerosene() {
-        return kerosene;
-    }
-
-    public void setKerosene(String kerosene) {
-        this.kerosene = kerosene;
-    }
-
-    public String getGlp() {
-        return glp;
-    }
-
-    public void setGlp(String glp) {
-        this.glp = glp;
-    }
-
-    public String getGnv() {
-        return gnv;
-    }
-
-    public void setGnv(String gnv) {
-        this.gnv = gnv;
-    }
-
     @Override
     public String toString() {
-        return "Feed{" + "title=" + title + ", description=" + description + ", pubDate=" + pubDate + ", link=" + link + ", language=" + language + ", copyright=" + copyright + ", guid=" + guid + ", gas95=" + gas95 + ", gas89=" + gas89 + ", gasoilp=" + gasoilp + ", gasoilr=" + gasoilr + ", kerosene=" + kerosene + ", glp=" + glp + ", gnv=" + gnv + '}';
+        return "Feed{" + "title=" + title + ", description=" + description + ", pubDate=" + pubDate + ", link=" + link + ", language=" + language + ", copyright=" + copyright + ", guid=" + guid + '}';
     }
-    
+
 }

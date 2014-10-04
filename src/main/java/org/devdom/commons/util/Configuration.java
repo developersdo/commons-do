@@ -30,19 +30,23 @@ package org.devdom.commons.util;
  * @since 0.0.1
  */
 public interface Configuration {
+    //URI del API de Developers Dominicanos
+    String DATA_DEVDO_URI_V1 = "http://data.developers.do/api/v1/";
     
-    public final String DATA_DEVDO_URL_V1 = "http://data.developers.do/api/v1/";
+    String DATA_RNC_URL = DATA_DEVDO_URI_V1 + "empresas/";
     
-    public final String DATA_RNC_URL = DATA_DEVDO_URL_V1 + "empresas/";
+    String DATA_PROVINCIAS_URL = DATA_DEVDO_URI_V1 + "provincias";
     
-    public final String DATA_PROVINCIAS_URL = DATA_DEVDO_URL_V1 + "provincias";
-    
-    public final String DATA_MUNICIPIOS_URL = DATA_DEVDO_URL_V1 + "municipios";
+    String DATA_MUNICIPIOS_URL = DATA_DEVDO_URI_V1 + "municipios";
 
-    public final String DATA_FERIADOS_URL = DATA_DEVDO_URL_V1 + "feriados";
+    String DATA_FERIADOS_URL = DATA_DEVDO_URI_V1 + "feriados";
     
-    public final String DR_TIME_ZONE = "Etc/GMT+4";
+    String DR_TIME_ZONE = "Etc/GMT+4";
+    //URI del Ministerio de Industria y Comercio de la República Dominicana 
+    String SEIC_GOV_URI = "http://www.seic.gov.do/";
     
-    public final String RSS_COMBUSTIBLES = "http://www.seic.gov.do/rss/combustibles.aspx";
+    String RSS_COMBUSTIBLES = SEIC_GOV_URI + "rss/combustibles.aspx";
+
+    String XML_LISTADO_COMBUSTIBLES = SEIC_GOV_URI + "hidrocarburos/precios-de-combustibles.aspx";
 
 }

@@ -20,7 +20,7 @@ En el POM.xml de su proyecto debe agregar:
 <dependency>
     <groupId>org.devdom</groupId>
     <artifactId>commons-do</artifactId>
-    <version>0.5.3</version>
+    <version>0.8.1</version>
     <type>jar</type>
 </dependency>
 ```

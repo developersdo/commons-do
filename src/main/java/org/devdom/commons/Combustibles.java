@@ -24,9 +24,11 @@
 
 package org.devdom.commons;
 
+import org.devdom.commons.dto.Combustible;
 import org.devdom.commons.service.RSSParser;
-import org.devdom.commons.dto.Feed;
-import org.devdom.commons.exceptions.MalformedXMLException;
+import org.devdom.commons.service.XMLParser;
+import org.devdom.commons.exceptions.DocumentFormatException;
+import java.util.ArrayList;
 
 /**
  * Clase utilizada para obtener los precios de los carburantes en la República Dominicana
@@ -36,112 +38,134 @@ import org.devdom.commons.exceptions.MalformedXMLException;
  */
 public class Combustibles {
     
-    private final RSSParser parser;
-    private final Feed feed;
-    
-    public static final String GASOLINA_PREMIUM = "gas95";
-    public static final String GASOLINA_REGULAR = "gas89";
-    public static final String GASOIL_PREMIUM = "gasoilp";
-    public static final String GASOIL_REGULAR = "gasoilr";
-    public static final String KEROSENE = "kerosene";
-    public static final String GAS_LICUADO_DE_PETROLEO = "glp";
-    public static final String GAS_NATURAL_VEHICULAR= "gnv";
+    public static final String GASOLINA_PREMIUM_LABEL = "gas95";
+    public static final String GASOLINA_REGULAR_LABEL = "gas89";
+    public static final String GASOIL_PREMIUM_LABEL = "gasoilp";
+    public static final String GASOIL_REGULAR_LABEL = "gasoilr";
+    public static final String KEROSENE_LABEL = "kerosene";
+    public static final String GAS_LICUADO_DE_PETROLEO_LABEL = "glp";
+    public static final String GAS_NATURAL_VEHICULAR_LABEL = "gnv";
+
+    public static final int GASOLINA_PREMIUM = 0;
+    public static final int GASOLINA_REGULAR = 1;
+    public static final int GASOIL_PREMIUM = 2;
+    public static final int GASOIL_REGULAR = 3;
+    public static final int KEROSENE = 4;
+    public static final int GAS_LICUADO_DE_PETROLEO = 5;
+    public static final int GAS_NATURAL_VEHICULAR = 6;
+
+    private final Combustible combustible;
+    private final RSSParser rssParser = new RSSParser();    
+    private final XMLParser xmlParser = new XMLParser();
 
     /**
      * 
-     * @throws MalformedXMLException 
      */
-    public Combustibles() throws MalformedXMLException {
-        this.parser = new RSSParser();
-        feed = parser.getResult();
+    public Combustibles() {
+        combustible = rssParser.getResult();
+    }
+
+    /**
+     * Obtener objeto Combustible con los precios actuales
+     * @see Combustible
+     * @return 
+     */
+    public Combustible getCurrentPrices(){
+        return combustible;
     }
     
     /**
-     * Obtener objeto Feed con los precios actuales
-     * @see Feed
-     * @return 
+     * Obtener histórico de los precios de los combustibles de la República Dominicana
+     * 
+     * @return ArrayList de objetos Combustibble
+     * @see Combustible
+     * @see ArrayList
+     * @throws DocumentFormatException si se pasan valores incorrectos o fuera de longitud
      */
-    public Feed getCurrentPrices(){
-        return feed;
+    public ArrayList<Combustible> getHistoricalList() 
+            throws DocumentFormatException{
+
+        return xmlParser.getCombustibles();
     }
     
     /**
      * Obtener el precio de un carburante dado el campo que desea ser evaluado
      * 
-     * @param item
-     * @return 
+     * @param item campo a ser evaluado
+     * @return valor
      */
     public double get(String item){
         
         if(item.equals(RSSParser.TITLE)){
             throw new NumberFormatException("title no puede ser retornado por esta vía");
         }
-        
-        return Double.parseDouble(parser.getProperty(feed, item));
+
+        return Double.parseDouble(rssParser.getProperty(combustible, item));
     }
     
     /**
      * Obtener el títuto usado en el RSS por el Ministerio de Industria y Comercio
-     * @return 
+     * 
+     * @return titulo para la semana
      */
     public String getTitle(){
-        return feed.getTitle();
+        return combustible.getTitle();
     }
     
     /**
      * Obtener el precio de la Combustibles Premium en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasolinaPremiumPrice(){
-        return get(Combustibles.GASOIL_PREMIUM);
+        return get(Combustibles.GASOIL_PREMIUM_LABEL);
     }
     
     /**
      * Obtener el precio de la Combustibles Regular en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasolinaRegularPrice(){
-        return get(Combustibles.GASOIL_REGULAR);
+        return get(Combustibles.GASOIL_REGULAR_LABEL);
     }
     
     /**
      * Obtener el precio del Gasoil Premium en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasoilPremiumPrice(){
-        return get(Combustibles.GASOIL_PREMIUM);
+        return get(Combustibles.GASOIL_PREMIUM_LABEL);
     }
     
     /**
      * Obtener el precio del Gasoil Regular en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasoilRegularPrice(){
-        return get(Combustibles.GASOIL_REGULAR);
+        return get(Combustibles.GASOIL_REGULAR_LABEL);
     }
     
     /**
      * Obtener el precio del Kerosene en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentKerosenePrice(){
-        return get(Combustibles.KEROSENE);
+        return get(Combustibles.KEROSENE_LABEL);
     }
     
     /**
      * Obtener el precio del Gas Licuado De Petroleo en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasLicuadoDePetroleo(){
-        return get(Combustibles.GAS_LICUADO_DE_PETROLEO);
+        return get(Combustibles.GAS_LICUADO_DE_PETROLEO_LABEL);
     }
     
     /**
      * Obtener el precio del Gas Natural Vehicular en la República Dominicana
-     * @return 
+     * @return double
      */
     public double getCurrentGasNautralVehicular(){
-        return get(Combustibles.GAS_NATURAL_VEHICULAR);
+        return get(Combustibles.GAS_NATURAL_VEHICULAR_LABEL);
     }
 
 }
