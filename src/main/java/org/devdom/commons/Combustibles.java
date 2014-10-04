@@ -37,15 +37,24 @@ import org.devdom.commons.exceptions.MalformedXMLException;
  */
 public class Combustibles {
     
-    public static final String GASOLINA_PREMIUM = "gas95";
-    public static final String GASOLINA_REGULAR = "gas89";
-    public static final String GASOIL_PREMIUM = "gasoilp";
-    public static final String GASOIL_REGULAR = "gasoilr";
-    public static final String KEROSENE = "kerosene";
-    public static final String GAS_LICUADO_DE_PETROLEO = "glp";
-    public static final String GAS_NATURAL_VEHICULAR= "gnv";
-    private RSSParser parser;
-    private Combustible combustible;
+    public static final String GASOLINA_PREMIUM_LABEL = "gas95";
+    public static final String GASOLINA_REGULAR_LABEL = "gas89";
+    public static final String GASOIL_PREMIUM_LABEL = "gasoilp";
+    public static final String GASOIL_REGULAR_LABEL = "gasoilr";
+    public static final String KEROSENE_LABEL = "kerosene";
+    public static final String GAS_LICUADO_DE_PETROLEO_LABEL = "glp";
+    public static final String GAS_NATURAL_VEHICULAR_LABEL = "gnv";
+
+    public static final int GASOLINA_PREMIUM = 0;
+    public static final int GASOLINA_REGULAR = 1;
+    public static final int GASOIL_PREMIUM = 2;
+    public static final int GASOIL_REGULAR = 3;
+    public static final int KEROSENE = 4;
+    public static final int GAS_LICUADO_DE_PETROLEO = 5;
+    public static final int GAS_NATURAL_VEHICULAR = 6;
+
+    private final RSSParser parser = new RSSParser();
+    private final Combustible combustible = parser.getResult();
 
     /**
      * 
@@ -54,12 +63,7 @@ public class Combustibles {
     public Combustibles() {
         
     }
-    
-    public void getRSSParser(){
-        this.parser = new RSSParser();
-        combustible = parser.getResult();
-    }
-    
+
     /**
      * Obtener objeto Feed con los precios actuales
      * @see Feed
@@ -80,7 +84,7 @@ public class Combustibles {
         if(item.equals(RSSParser.TITLE)){
             throw new NumberFormatException("title no puede ser retornado por esta vía");
         }
-        
+
         return Double.parseDouble(parser.getProperty(combustible, item));
     }
     
@@ -97,7 +101,7 @@ public class Combustibles {
      * @return 
      */
     public double getCurrentGasolinaPremiumPrice(){
-        return get(Combustibles.GASOIL_PREMIUM);
+        return get(Combustibles.GASOIL_PREMIUM_LABEL);
     }
     
     /**
@@ -105,7 +109,7 @@ public class Combustibles {
      * @return 
      */
     public double getCurrentGasolinaRegularPrice(){
-        return get(Combustibles.GASOIL_REGULAR);
+        return get(Combustibles.GASOIL_REGULAR_LABEL);
     }
     
     /**
@@ -113,7 +117,7 @@ public class Combustibles {
      * @return 
      */
     public double getCurrentGasoilPremiumPrice(){
-        return get(Combustibles.GASOIL_PREMIUM);
+        return get(Combustibles.GASOIL_PREMIUM_LABEL);
     }
     
     /**
@@ -121,7 +125,7 @@ public class Combustibles {
      * @return 
      */
     public double getCurrentGasoilRegularPrice(){
-        return get(Combustibles.GASOIL_REGULAR);
+        return get(Combustibles.GASOIL_REGULAR_LABEL);
     }
     
     /**
@@ -129,7 +133,7 @@ public class Combustibles {
      * @return 
      */
     public double getCurrentKerosenePrice(){
-        return get(Combustibles.KEROSENE);
+        return get(Combustibles.KEROSENE_LABEL);
     }
     
     /**
@@ -137,7 +141,7 @@ public class Combustibles {
      * @return 
      */
     public double getCurrentGasLicuadoDePetroleo(){
-        return get(Combustibles.GAS_LICUADO_DE_PETROLEO);
+        return get(Combustibles.GAS_LICUADO_DE_PETROLEO_LABEL);
     }
     
     /**
@@ -145,7 +149,7 @@ public class Combustibles {
      * @return 
      */
     public double getCurrentGasNautralVehicular(){
-        return get(Combustibles.GAS_NATURAL_VEHICULAR);
+        return get(Combustibles.GAS_NATURAL_VEHICULAR_LABEL);
     }
 
 }
