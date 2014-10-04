@@ -33,6 +33,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
 import org.devdom.commons.Combustibles;
+import org.devdom.commons.dto.Combustible;
 import org.devdom.commons.dto.Feed;
 import org.devdom.commons.exceptions.MalformedXMLException;
 import org.devdom.commons.util.Configuration;
@@ -98,39 +99,39 @@ public class RSSParser{
      * Método utilizado par retornar el valor de un campo dado el objeto Feed
      * y el campo que se desea evaluar
      * 
-     * @see Feed
-     * @param feed Objeto que almacena las respuestas de un RSS
+     * @see Combustible
+     * @param combustible Objeto que almacena las respuestas de un RSS
      * @param item campo que se desea retornar
      * @return String del valor del campo suplido
      */
-    public String getProperty(Feed feed, String item){
+    public String getProperty(Combustible combustible, String item){
         
-        if(item.equals(Combustibles.GASOIL_PREMIUM)){
-            return feed.getGasoilp();
+        if(item.equals(Combustibles.GASOIL_PREMIUM_LABEL)){
+            return combustible.getGasoilp();
         }
 
-        if(item.equals(Combustibles.GASOIL_REGULAR)){
-            return feed.getGasoilr();
+        if(item.equals(Combustibles.GASOIL_REGULAR_LABEL)){
+            return combustible.getGasoilr();
         }
 
-        if(item.equals(Combustibles.GASOLINA_PREMIUM)){
-            return feed.getGas95();
+        if(item.equals(Combustibles.GASOLINA_PREMIUM_LABEL)){
+            return combustible.getGas95();
         }
 
-        if(item.equals(Combustibles.GASOLINA_REGULAR)){
-            return feed.getGas89();
+        if(item.equals(Combustibles.GASOLINA_REGULAR_LABEL)){
+            return combustible.getGas89();
         }
 
-        if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO)){
-            return feed.getGlp();
+        if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO_LABEL)){
+            return combustible.getGlp();
         }
 
-        if(item.equals(Combustibles.GAS_NATURAL_VEHICULAR)){
-            return feed.getGnv();
+        if(item.equals(Combustibles.GAS_NATURAL_VEHICULAR_LABEL)){
+            return combustible.getGnv();
         }
 
-        if(item.equals(RSSParser.TITLE)){
-            return feed.getTitle();
+        if(item.equals(RSSParser.TITLE)){ 
+            return combustible.getTitle();
         }
         return "0";
     }
@@ -140,39 +141,39 @@ public class RSSParser{
      * objeto que se de sea asignar 
      * 
      * 
-     * @param feed objeto Feed que será alterado
+     * @param combustible objeto Feed que será alterado
      * @param item item al cual se desea asignar el valor
      * @param value valor del campo que se desea asignar 
      * @see Feed
      */
-    private void setProperty(Feed feed, String item, String value) {
+    private void setProperty(Combustible combustible, String item, String value) {
 
-        if(item.equals(Combustibles.GASOIL_PREMIUM)){
-            feed.setGasoilp(value);
+        if(item.equals(Combustibles.GASOIL_PREMIUM_LABEL)){
+            combustible.setGasoilp(value);
         }
 
-        if(item.equals(Combustibles.GASOIL_REGULAR)){
-            feed.setGasoilr(value);
+        if(item.equals(Combustibles.GASOIL_REGULAR_LABEL)){
+            combustible.setGasoilr(value);
         }
 
-        if(item.equals(Combustibles.GASOLINA_PREMIUM)){
-            feed.setGas95(value);
+        if(item.equals(Combustibles.GASOLINA_PREMIUM_LABEL)){
+            combustible.setGas95(value);
         }
 
-        if(item.equals(Combustibles.GASOLINA_REGULAR)){
-            feed.setGas89(value);
+        if(item.equals(Combustibles.GASOLINA_REGULAR_LABEL)){
+            combustible.setGas89(value);
         }
 
-        if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO)){
-            feed.setGlp(value);
+        if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO_LABEL)){
+            combustible.setGlp(value);
         }
 
-        if(item.equals(Combustibles.GAS_NATURAL_VEHICULAR)){
-            feed.setGnv(value);
+        if(item.equals(Combustibles.GAS_NATURAL_VEHICULAR_LABEL)){
+            combustible.setGnv(value);
         }
 
         if(item.equals(RSSParser.TITLE)){
-            feed.setTitle(value);
+            combustible.setTitle(value);
         }
     }
 
@@ -183,9 +184,9 @@ public class RSSParser{
      * @return
      * @throws MalformedXMLException 
      */
-    public Feed getResult() throws MalformedXMLException{
+    public Combustible getResult() throws MalformedXMLException{
         
-        Feed feed = new Feed();
+        Combustible combustible = new Combustible();
 
         while (eventReader.hasNext()) {
             try{
@@ -196,13 +197,13 @@ public class RSSParser{
                     String value = getCharacterData(event, eventReader);
                     String item = event.asStartElement().getName().getLocalPart();
 
-                    setProperty(feed, item, value);
+                    setProperty(combustible, item, value);
                 }
             }catch(XMLStreamException ex){
                 throw new MalformedXMLException(ex.getMessage(),ex);
             }
         }
-        return feed;
+        return combustible;
     }
 
 }

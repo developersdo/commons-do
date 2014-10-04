@@ -43,7 +43,8 @@ public class Combustible {
     public Combustible() {
     }
 
-    public Combustible(String pubDate, String gas95, String gas89, String gasoilp, String gasoilr, String kerosene, String glp, String gnv) {
+    public Combustible(String title, String pubDate, String gas95, String gas89, String gasoilp, String gasoilr, String kerosene, String glp, String gnv) {
+        this.title = title;
         this.pubDate = pubDate;
         this.gas95 = gas95;
         this.gas89 = gas89;
@@ -128,7 +129,7 @@ public class Combustible {
 
     @Override
     public String toString() {
-        return "Combustible{" + "pubDate=" + pubDate + ", gas95=" + gas95 + ", gas89=" + gas89 + ", gasoilp=" + gasoilp + ", gasoilr=" + gasoilr + ", kerosene=" + kerosene + ", glp=" + glp + ", gnv=" + gnv + '}';
+        return "Combustible{" + "title=" + title + ", pubDate=" + pubDate + ", gas95=" + gas95 + ", gas89=" + gas89 + ", gasoilp=" + gasoilp + ", gasoilr=" + gasoilr + ", kerosene=" + kerosene + ", glp=" + glp + ", gnv=" + gnv + '}';
     }
 
 }
