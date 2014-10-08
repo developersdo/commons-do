@@ -42,11 +42,4 @@ public interface Configuration {
     String DATA_FERIADOS_URL = DATA_DEVDO_URI_V1 + "feriados";
     
     String DR_TIME_ZONE = "Etc/GMT+4";
-    //URI del Ministerio de Industria y Comercio de la República Dominicana 
-    String SEIC_GOV_URI = "http://www.seic.gov.do/";
-    
-    String RSS_COMBUSTIBLES = SEIC_GOV_URI + "rss/combustibles.aspx";
-
-    String XML_LISTADO_COMBUSTIBLES = SEIC_GOV_URI + "hidrocarburos/precios-de-combustibles.aspx";
-
 }

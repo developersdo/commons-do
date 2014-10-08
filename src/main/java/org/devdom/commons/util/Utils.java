@@ -24,10 +24,17 @@
 
 package org.devdom.commons.util;
 
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+import java.util.Map.Entry;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 /**
  *
@@ -95,4 +102,34 @@ public class Utils {
         return sdf.parse(date);
     }
 
+
+    public static InputStream httpGet(String url, Map<String, String> headers) throws Exception {
+        InputStream result = null;
+        HttpGet get = new HttpGet(url);
+
+        if(headers != null){
+            for(Entry<String, String> header : headers.entrySet()){
+                get.addHeader(header.getKey(), header.getValue());
+            }
+        }
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpResponse httpResponse = client.execute(get);
+
+        if(httpResponse.getEntity() != null){
+            result = httpResponse.getEntity().getContent();
+        }
+
+        return result;
+    }
+
+    public static void close(InputStream... inputStreams){
+        for(InputStream input : inputStreams){
+            try{
+                input.close();
+            }catch(Exception e){
+                //ignore
+            }
+        }
+    }
 }

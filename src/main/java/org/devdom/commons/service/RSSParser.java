@@ -32,9 +32,6 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
-import org.devdom.commons.Combustibles;
-import org.devdom.commons.dto.Combustible;
-import org.devdom.commons.dto.Feed;
 import org.devdom.commons.exceptions.MalformedXMLException;
 import org.devdom.commons.util.Configuration;
 
@@ -62,19 +59,19 @@ public class RSSParser{
      * @throws MalformedXMLException 
      */
     public RSSParser() throws MalformedXMLException {
-        try{
-            
-            URL url = new URL(Configuration.RSS_COMBUSTIBLES);
-            InputStream in = url.openStream();
-            eventReader = inputFactory.createXMLEventReader(in);
-            
-        }catch(MalformedURLException ex){
-            throw new MalformedXMLException(ex.getMessage(), ex);
-        } catch (IOException ex) {
-            throw new MalformedXMLException(ex.getMessage(), ex);
-        } catch (XMLStreamException ex) {
-            throw new MalformedXMLException(ex.getMessage(), ex);
-        }
+//        try{
+//            
+//            URL url = new URL(Configuration.RSS_COMBUSTIBLES);
+//            InputStream in = url.openStream();
+//            eventReader = inputFactory.createXMLEventReader(in);
+//            
+//        }catch(MalformedURLException ex){
+//            throw new MalformedXMLException(ex.getMessage(), ex);
+//        } catch (IOException ex) {
+//            throw new MalformedXMLException(ex.getMessage(), ex);
+//        } catch (XMLStreamException ex) {
+//            throw new MalformedXMLException(ex.getMessage(), ex);
+//        }
     }
 
     /**
@@ -96,47 +93,6 @@ public class RSSParser{
     }
     
     /**
-     * Método utilizado par retornar el valor de un campo dado el objeto Feed
-     * y el campo que se desea evaluar
-     * 
-     * @see Combustible
-     * @param combustible Objeto que almacena las respuestas de un RSS
-     * @param item campo que se desea retornar
-     * @return String del valor del campo suplido
-     */
-    public String getProperty(Combustible combustible, String item){
-        
-        if(item.equals(Combustibles.GASOIL_PREMIUM_LABEL)){
-            return combustible.getGasoilPremium();
-        }
-
-        if(item.equals(Combustibles.GASOIL_REGULAR_LABEL)){
-            return combustible.getGasoilRegular();
-        }
-
-        if(item.equals(Combustibles.GASOLINA_PREMIUM_LABEL)){
-            return combustible.getGasolinaPremium();
-        }
-
-        if(item.equals(Combustibles.GASOLINA_REGULAR_LABEL)){
-            return combustible.getGasolinaRegular();
-        }
-
-        if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO_LABEL)){
-            return combustible.getGlp();
-        }
-
-        if(item.equals(Combustibles.GAS_NATURAL_VEHICULAR_LABEL)){
-            return combustible.getGnv();
-        }
-
-        if(item.equals(RSSParser.TITLE)){ 
-            return combustible.getTitle();
-        }
-        return "0";
-    }
-
-    /**
      *      * Método utilizado para asingar un valor dado el objeto Feed, el campo y el
      * objeto que se de sea asignar 
      * 
@@ -146,36 +102,36 @@ public class RSSParser{
      * @param value valor del campo que se desea asignar 
      * @see Feed
      */
-    private void setProperty(Combustible combustible, String item, String value) {
-
-        if(item.equals(Combustibles.GASOIL_PREMIUM_LABEL)){
-            combustible.setGasoilPremium(value);
-        }
-
-        if(item.equals(Combustibles.GASOIL_REGULAR_LABEL)){
-            combustible.setGasoilRegular(value);
-        }
-
-        if(item.equals(Combustibles.GASOLINA_PREMIUM_LABEL)){
-            combustible.setGasolinaPremium(value);
-        }
-
-        if(item.equals(Combustibles.GASOLINA_REGULAR_LABEL)){
-            combustible.setGasolinaRegular(value);
-        }
-
-        if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO_LABEL)){
-            combustible.setGlp(value);
-        }
-
-        if(item.equals(Combustibles.GAS_NATURAL_VEHICULAR_LABEL)){
-            combustible.setGnv(value);
-        }
-
-        if(item.equals(RSSParser.TITLE)){
-            combustible.setTitle(value);
-        }
-    }
+//    private void setProperty(Combustible combustible, String item, String value) {
+//
+//        if(item.equals(Combustible.Tipos.GASOIL_PREMIUM_LABEL)){
+//            combustible.setGasoilPremium(value);
+//        }
+//
+//        if(item.equals(Combustibles.GASOIL_REGULAR_LABEL)){
+//            combustible.setGasoilRegular(value);
+//        }
+//
+//        if(item.equals(Combustibles.GASOLINA_PREMIUM_LABEL)){
+//            combustible.setGasolinaPremium(value);
+//        }
+//
+//        if(item.equals(Combustibles.GASOLINA_REGULAR_LABEL)){
+//            combustible.setGasolinaRegular(value);
+//        }
+//
+//        if(item.equals(Combustibles.GAS_LICUADO_DE_PETROLEO_LABEL)){
+//            combustible.setGlp(value);
+//        }
+//
+//        if(item.equals(Combustibles.GAS_NATURAL_VEHICULAR_LABEL)){
+//            combustible.setGnv(value);
+//        }
+//
+//        if(item.equals(RSSParser.TITLE)){
+//            combustible.setTitle(value);
+//        }
+//    }
 
     /**
      * Método utilizado para obtener un Objeto feed recorriendo los resultado 
@@ -184,26 +140,26 @@ public class RSSParser{
      * @return
      * @throws MalformedXMLException 
      */
-    public Combustible getResult() throws MalformedXMLException{
-        
-        Combustible combustible = new Combustible();
-
-        while (eventReader.hasNext()) {
-            try{
-                event = eventReader.nextEvent();
-                
-                if (event.isStartElement()) {
-                    
-                    String value = getCharacterData(event, eventReader);
-                    String item = event.asStartElement().getName().getLocalPart();
-
-                    setProperty(combustible, item, value);
-                }
-            }catch(XMLStreamException ex){
-                throw new MalformedXMLException(ex.getMessage(),ex);
-            }
-        }
-        return combustible;
-    }
+//    public Combustible getResult() throws MalformedXMLException{
+//        
+//        Combustible combustible = new Combustible();
+//
+//        while (eventReader.hasNext()) {
+//            try{
+//                event = eventReader.nextEvent();
+//                
+//                if (event.isStartElement()) {
+//                    
+//                    String value = getCharacterData(event, eventReader);
+//                    String item = event.asStartElement().getName().getLocalPart();
+//
+//                    setProperty(combustible, item, value);
+//                }
+//            }catch(XMLStreamException ex){
+//                throw new MalformedXMLException(ex.getMessage(),ex);
+//            }
+//        }
+//        return combustible;
+//    }
 
 }

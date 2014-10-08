@@ -1,3 +1,7 @@
+package org.devdom.commons;
+
+import java.util.Date;
+
 /*
  * The MIT License
  *
@@ -21,47 +25,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-package org.devdom.commons;
-
-import org.devdom.commons.exceptions.MalformedXMLException;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import org.junit.Before;
-import org.junit.Test;
-
 /**
- *
+ * Entidad para expresar los precios variantes de los combustibles expresados por 
+ * semana.
+ * 
  * @author Carlos Vásquez Polanco
+ * @since 0.7.8
  */
-public class CombustiblesTest {
-    
-    /**
-     *
-     */
-    public CombustiblesTest() {
-    }
-    
-    /**
-     *
-     * @throws MalformedXMLException
-     */
-    @Before
-    public void setUp() throws MalformedXMLException {
+public class Combustible {
+    private final double price;
+    private final Tipos type;
 
+    public enum Tipos {
+      GASOLINA_PREMIUM,
+      GASOLINA_REGULAR,
+      GASOIL_PREMIUM,
+      GASOIL_REGULAR,
+      KEROSENE,
+      GAS_LICUADO_PETROLEO,
+      GAS_NATURAL_VEHICULAR
     }
 
-    /**
-     * Test of getCurrentPrices method, of class Combustibles.
-     */
-    @Test
-    public void testGetCurrentPrices() throws Exception {
-        Combustibles c = Combustibles.getCurrentPrices();
-        System.out.println(c);
-        assertNotNull(c);
-        assertNotNull(c.getTitle());
-        assertNotNull(c.getPublishDate());
-        assertFalse(c.getCombustibles().isEmpty());
-    }
-    
+  Combustible(double price, Tipos type) {
+    this.price = price;
+    this.type = type;
+  }
+
+  public double getPrice() {
+    return price;
+  }
+
+  public Tipos getType() {
+    return type;
+  }
+
+  @Override
+  public String toString() {
+    return "Combustible{" + "price=" + price + ", type=" + type + '}';
+  }
 }
