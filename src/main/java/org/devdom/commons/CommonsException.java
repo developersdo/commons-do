@@ -24,44 +24,20 @@
 
 package org.devdom.commons;
 
-import org.devdom.commons.exceptions.MalformedXMLException;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import org.junit.Before;
-import org.junit.Test;
-
 /**
  *
- * @author Carlos Vásquez Polanco
+ * @author George Aristy
  */
-public class CombustiblesTest {
-    
-    /**
-     *
-     */
-    public CombustiblesTest() {
-    }
-    
-    /**
-     *
-     * @throws MalformedXMLException
-     */
-    @Before
-    public void setUp() throws MalformedXMLException {
-
+public class CommonsException extends Exception {
+    public CommonsException(String message) {
+        super(message);
     }
 
-    /**
-     * Test of getCurrentPrices method, of class Combustibles.
-     */
-    @Test
-    public void testGetCurrentPrices() throws Exception {
-        Combustibles c = Combustibles.getCurrentPrices();
-        System.out.println(c);
-        assertNotNull(c);
-        assertNotNull(c.getTitle());
-        assertNotNull(c.getPublishDate());
-        assertFalse(c.getCombustibles().isEmpty());
+    public CommonsException(String message, Throwable cause) {
+        super(message, cause);
     }
-    
+
+    public CommonsException(Throwable cause) {
+        super(cause);
+    }
 }

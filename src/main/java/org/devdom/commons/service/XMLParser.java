@@ -39,7 +39,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.devdom.commons.Combustibles;
-import org.devdom.commons.dto.Combustible;
+import org.devdom.commons.Combustible;
 import org.devdom.commons.exceptions.DocumentFormatException;
 import org.devdom.commons.exceptions.MalformedXMLException;
 import org.devdom.commons.util.Configuration;
@@ -59,7 +59,7 @@ public class XMLParser{
     private final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance(); 
     private final XPathFactory xpathFactory = XPathFactory.newInstance();
     private final XPath xpath = xpathFactory.newXPath();
-    private final String FIND_STRART = "<div id=\"AllCombustibles\">";
+    private final String FIND_START = "<div id=\"AllCombustibles\">";
     private final String FIND_END_TAG = "</ul>";
     private final String XML_DOC = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
 
@@ -69,24 +69,24 @@ public class XMLParser{
      * 
      */
     public XMLParser() throws MalformedXMLException {
-        try{
-
-            URL url = new URL(Configuration.XML_LISTADO_COMBUSTIBLES);
-            InputStream in = url.openStream();
-
-            xml = new Scanner(in, "UTF-8").useDelimiter("\\A").next();
-
-            //Workaround por que el documento no estricto y las etiquetas abiertas dañan el formato.
-            //Lo idea hubiera sido convertir el documento completo a XML y usar xpath            
-            xml = xml.substring(xml.indexOf(FIND_STRART)+FIND_STRART.length());
-            xml = xml.substring(0, xml.indexOf(FIND_END_TAG) + FIND_END_TAG.length());
-            xml = XML_DOC + xml;
-
-        }catch(MalformedURLException ex){
-            throw new MalformedXMLException(ex.getMessage(), ex);
-        } catch (IOException ex) {
-            throw new MalformedXMLException(ex.getMessage(), ex);
-        }
+//        try{
+//
+//            URL url = new URL(Configuration.XML_LISTADO_COMBUSTIBLES);
+//            InputStream in = url.openStream();
+//
+//            xml = new Scanner(in, "UTF-8").useDelimiter("\\A").next();
+//
+//            //Workaround por que el documento no estricto y las etiquetas abiertas dañan el formato.
+//            //Lo idea hubiera sido convertir el documento completo a XML y usar xpath            
+//            xml = xml.substring(xml.indexOf(FIND_START)+FIND_START.length());
+//            xml = xml.substring(0, xml.indexOf(FIND_END_TAG) + FIND_END_TAG.length());
+//            xml = XML_DOC + xml;
+//
+//        }catch(MalformedURLException ex){
+//            throw new MalformedXMLException(ex.getMessage(), ex);
+//        } catch (IOException ex) {
+//            throw new MalformedXMLException(ex.getMessage(), ex);
+//        }
     }
     
     /**
@@ -104,7 +104,7 @@ public class XMLParser{
             NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
 
             for (int i = 0; i < nodes.getLength(); i++) {
-                newList.add( getCombustible( nodes.item(i) ) );
+//                newList.add( getCombustible( nodes.item(i) ) );
             }
         } catch (XPathExpressionException ex) {
             throw new DocumentFormatException(ex.getMessage(), ex);
@@ -118,55 +118,55 @@ public class XMLParser{
      * @param node
      * @return 
      */
-    private Combustible getCombustible(Node node){
-
-        // xpath equivalente: /div/div
-        NodeList divs = node.getChildNodes().item(0).getChildNodes();
-
-        // xpath equivalente: [1]/text()
-        String title = divs.item(0).getTextContent();
-
-        // xpath equivalente: [2]/strong/text()
-        String pubDate = divs.item(1).getFirstChild().getTextContent();
-        
-        // xpath equivalente: [3]/div/div/
-        NodeList combustiblePrices = (NodeList) divs.item(2).getFirstChild().getChildNodes();
-        
-        String gasolinaPremium = combustiblePrices.item(Combustibles.GASOLINA_PREMIUM)
-                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
-        
-        String gasolinaRegular = combustiblePrices.item(Combustibles.GASOLINA_REGULAR)
-                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
-        
-        String gasoilPremium = combustiblePrices.item(Combustibles.GASOIL_PREMIUM)
-                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
-        
-        String gasoilRegular = combustiblePrices.item(Combustibles.GASOIL_REGULAR)
-                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
-        
-        String kerosene = combustiblePrices.item(Combustibles.KEROSENE)
-                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
-        
-        String gasLicuadoDePetroleo = combustiblePrices.item(Combustibles.GAS_LICUADO_DE_PETROLEO)
-                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
-        
-        String gasNaturalVehicular = combustiblePrices.item(Combustibles.GAS_NATURAL_VEHICULAR)
-                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
-        
-        Combustible newCombustible = new Combustible();
-        newCombustible.setTitle(title);
-        newCombustible.setPubDate(pubDate);
-        newCombustible.setGasolinaPremium(gasolinaPremium);
-        newCombustible.setGasolinaRegular(gasolinaRegular);
-        newCombustible.setGasoilPremium(gasoilPremium);
-        newCombustible.setGasoilRegular(gasoilRegular);
-        newCombustible.setKerosene(kerosene);
-        newCombustible.setGlp(gasLicuadoDePetroleo);
-        newCombustible.setGnv(gasNaturalVehicular);
-        
-        return newCombustible;
-
-    }
+//    private Combustible getCombustible(Node node){
+//
+//        // xpath equivalente: /div/div
+//        NodeList divs = node.getChildNodes().item(0).getChildNodes();
+//
+//        // xpath equivalente: [1]/text()
+//        String title = divs.item(0).getTextContent();
+//
+//        // xpath equivalente: [2]/strong/text()
+//        String pubDate = divs.item(1).getFirstChild().getTextContent();
+//        
+//        // xpath equivalente: [3]/div/div/
+//        NodeList combustiblePrices = (NodeList) divs.item(2).getFirstChild().getChildNodes();
+//        
+//        String gasolinaPremium = combustiblePrices.item(Combustibles.GASOLINA_PREMIUM)
+//                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
+//        
+//        String gasolinaRegular = combustiblePrices.item(Combustibles.GASOLINA_REGULAR)
+//                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
+//        
+//        String gasoilPremium = combustiblePrices.item(Combustibles.GASOIL_PREMIUM)
+//                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
+//        
+//        String gasoilRegular = combustiblePrices.item(Combustibles.GASOIL_REGULAR)
+//                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
+//        
+//        String kerosene = combustiblePrices.item(Combustibles.KEROSENE)
+//                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
+//        
+//        String gasLicuadoDePetroleo = combustiblePrices.item(Combustibles.GAS_LICUADO_DE_PETROLEO)
+//                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
+//        
+//        String gasNaturalVehicular = combustiblePrices.item(Combustibles.GAS_NATURAL_VEHICULAR)
+//                                    .getChildNodes().item(1).getTextContent().replace("RD$","");
+//        
+//        Combustible newCombustible = new Combustible();
+//        newCombustible.setTitle(title);
+//        newCombustible.setPubDate(pubDate);
+//        newCombustible.setGasolinaPremium(gasolinaPremium);
+//        newCombustible.setGasolinaRegular(gasolinaRegular);
+//        newCombustible.setGasoilPremium(gasoilPremium);
+//        newCombustible.setGasoilRegular(gasoilRegular);
+//        newCombustible.setKerosene(kerosene);
+//        newCombustible.setGlp(gasLicuadoDePetroleo);
+//        newCombustible.setGnv(gasNaturalVehicular);
+//        
+//        return newCombustible;
+//
+//    }
     
     /**
      * 
